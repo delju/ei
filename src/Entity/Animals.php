@@ -72,6 +72,10 @@ class Animals
     #[Slug(fields: ['name'], updatable: false )]
     private $slug;
 
+    #[ORM\OneToOne(inversedBy: 'animals', targetEntity: Gallery::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private $gallery;
+
     public function __construct()
     {
         $this->getOn = new ArrayCollection();
@@ -313,6 +317,18 @@ class Animals
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getGallery(): ?Gallery
+    {
+        return $this->gallery;
+    }
+
+    public function setGallery(Gallery $gallery): self
+    {
+        $this->gallery = $gallery;
 
         return $this;
     }
