@@ -1,0 +1,157 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <!-- PLUGINS CSS STYLE -->
+    <link href="{{ asset('/user/plugins/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet') }}">
+    <!-- Bootstrap -->
+    <link href="{{ asset('/user/plugins/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('/user/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+    <!-- Owl Carousel -->
+    <link href="{{ asset('/user/plugins/slick-carousel/slick/slick.css') }}" rel="stylesheet">
+    <link href="{{ asset('/user/plugins/slick-carousel/slick/slick-theme.css') }}" rel="stylesheet">
+    <!-- Fancy Box -->
+    <link href="{{ asset('/userplugins/fancybox/jquery.fancybox.pack.css') }}" rel="stylesheet">
+    <link href="{{ asset('/user/plugins/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
+    <link href="{{ asset('/user/plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css') }}" rel="stylesheet">
+    <!-- CUSTOM CSS -->
+    <link href="{{ asset('/user/css/style.css') }}" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FAVICON -->
+    <link href="<{{ asset('/user/img/favicon.png') }}" rel="shortcut icon">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+{% endblock stylesheets %}
+
+{% block body %}
+    <section class="nav-color">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar navbar-expand-lg  navigation">
+                        <a class="navbar-brand" href="{{ url('home') }}"
+                        >
+                            <img class="logo" src="{{ asset('/user/images/logo.png') }}" alt="" >
+                        </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto main-nav ">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{{ url('home') }}">Notre mission</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('adoption') }}">Adoption</a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link " href="{{ url('conditions') }}" >Conditions</a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link " href="{{ url('contact') }}" >Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% block page %}
+    {% endblock page %}
+
+    <!--============================
+=            Footer            =
+=============================-->
+
+    <footer class="footer section">
+        <!-- Container Start -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-7 offset-md-1 offset-lg-0">
+                    <!-- About -->
+                    <div class="block about">
+                        <!-- footer logo -->
+                        <img src="" alt="">
+                        <!-- description -->
+                        <p class="alt-color quote">"Pour acheter un animal, vous aurez juste besoin d'argent. Pour adopter un animal, vous avez juste besoin d'un cœur"</p>
+                    </div>
+                </div>
+                <!-- Link list -->
+                <div class="col-lg-3 offset-lg-1 col-md-3">
+                    <div class="block">
+                        <h4>Pages</h4>
+                        <ul>
+                            <li><a href="{{ url('home') }}">Notre mission</a></li>
+                            <li><a href="{{ url('adoption') }}">Adoption</a></li>
+                            <li><a href="{{ url('conditions') }}">Conditions</a></li>
+                            <li><a href="{{ url('contact') }}">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Promotion -->
+                <div class="col-lg-4 col-md-7">
+                    <!-- App promotion -->
+                    <div class="block-2 app-promotion">
+                        <div class="col-12">
+                            <!-- Social Icons -->
+                            <ul class="social-media-icons text-right">
+                                <li><a class="fa fa-facebook" href=""></a></li>
+                                <li><a class="fa fa-twitter" href=""></a></li>
+                                <li><a class="fa fa-pinterest-p" href=""></a></li>
+                                <li><a class="fa fa-vimeo" href=""></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container End -->
+    </footer>
+    <!-- Footer Bottom -->
+    <footer class="footer-bottom">
+        <!-- Container Start -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-12">
+                    <!-- Copyright -->
+                    <div class="copyright">
+                        <p>Copyright © 2016. All Rights Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Container End -->
+        <!-- To Top -->
+        <div class="top-to">
+            <a id="top" class="" href=""><i class="fa fa-angle-up"></i></a>
+        </div>
+    </footer>
+{% endblock body %}
+
+ {% block javascripts %}
+     <script src="{{ asset('/user/plugins/jquery/jquery.min.js') }}"></script>
+     <script src="{{ asset('/user/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+     <script src="{{ asset('/user/plugins/tether/js/tether.min.js') }}"></script>
+     <script src="{{ asset('/user/plugins/raty/jquery.raty-fa.js') }}"></script>
+     <script src="{{ asset('/user/plugins/bootstrap/dist/js/popper.min.js') }}"></script>
+     <script src="{{ asset('/user/plugins/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+     <script src="{{ asset('/user/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js') }}"></script>
+     <script src="{{ asset('/user/plugins/slick-carousel/slick/slick.min.js') }}"></script>
+     <script src="{{ asset('/user/plugins/jquery-nice-select/js/jquery.nice-select.min.js') }}"></script>
+     <script src="{{ asset('/user/plugins/fancybox/jquery.fancybox.pack.js') }}"></script>
+     <script src="{{ asset('/user/plugins/smoothscroll/SmoothScroll.min.js') }}"></script>
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+     <script src="{{ asset('/user/js/scripts.js') }}"></script>
+ {% endblock %}
