@@ -15,7 +15,7 @@ class DefaultController extends AbstractController
      */
     public function Home(): Response
     {
-        return $this->render('pages/home.html.twig');
+        return $this->render('pages/user/home.html.twig');
     }
 
     /**
@@ -23,7 +23,7 @@ class DefaultController extends AbstractController
      */
     public function Adoption(): Response
     {
-        return $this->render('pages/adoption.html.twig');
+        return $this->render('pages/user/adoption.html.twig');
     }
 
     /**
@@ -31,7 +31,7 @@ class DefaultController extends AbstractController
      */
     public function Conditions(): Response
     {
-        return $this->render('pages/conditions.html.twig');
+        return $this->render('pages/user/conditions.html.twig');
     }
 
     /**
@@ -39,7 +39,7 @@ class DefaultController extends AbstractController
      */
     public function Contact(): Response
     {
-        return $this->render('pages/contact.html.twig');
+        return $this->render('pages/user/contact.html.twig');
     }
 
 }

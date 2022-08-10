@@ -76,6 +76,9 @@ class Animals
     #[ORM\JoinColumn(nullable: false)]
     private $gallery;
 
+    #[ORM\ManyToOne(targetEntity: Races::class, inversedBy: 'animals')]
+    private $races;
+
     public function __construct()
     {
         $this->getOn = new ArrayCollection();
@@ -329,6 +332,18 @@ class Animals
     public function setGallery(Gallery $gallery): self
     {
         $this->gallery = $gallery;
+
+        return $this;
+    }
+
+    public function getRaces(): ?Races
+    {
+        return $this->races;
+    }
+
+    public function setRaces(?Races $races): self
+    {
+        $this->races = $races;
 
         return $this;
     }

@@ -2,11 +2,41 @@
 {% block title %} CopAnimaux - Contact {% endblock title %}
 
 {% block page %}
-    <section class="page">
-        <div class="container">
-            <h1>
+
+            <h1 class="first-title">
                 Contact
             </h1>
+
+    <div class="row">
+        <div class="col-md-10 offset-md-1 col-lg-12 offset-lg-0">
+
+            <div class="block comment">
+
+                <form action="#">
+                    <!-- Message -->
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <!-- Name -->
+                            <div class="form-group mb-30">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <!-- Email -->
+                            <div class="form-group mb-30">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-30">
+                        <label for="message">Message</label>
+                        <textarea class="form-control" id="message" rows="10"></textarea>
+                    </div>
+                    <button class="btn btn-copanimaux">Envoyer</button>
+                </form>
+            </div>
         </div>
-    </section>
+
 {% endblock page %}

@@ -21,9 +21,13 @@ class Species
     #[ORM\OneToMany(mappedBy: 'species', targetEntity: Animals::class)]
     private $animals;
 
+    #[ORM\OneToMany(mappedBy: 'species', targetEntity: Races::class, orphanRemoval: true)]
+    private $races;
+
     public function __construct()
     {
         $this->animals = new ArrayCollection();
+        $this->races = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,6 +71,36 @@ class Species
             // set the owning side to null (unless already changed)
             if ($animal->getSpecies() === $this) {
                 $animal->setSpecies(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Races>
+     */
+    public function getRaces(): Collection
+    {
+        return $this->races;
+    }
+
+    public function addRace(Races $race): self
+    {
+        if (!$this->races->contains($race)) {
+            $this->races[] = $race;
+            $race->setSpecies($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRace(Races $race): self
+    {
+        if ($this->races->removeElement($race)) {
+            // set the owning side to null (unless already changed)
+            if ($race->getSpecies() === $this) {
+                $race->setSpecies(null);
             }
         }
 

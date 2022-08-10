@@ -43,9 +43,9 @@ p {
 }
 
 label {
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: 0;
-  color: #848484;
+  color: #000000;
 }
 
 .nav-pills .nav-link {
@@ -242,7 +242,6 @@ a:focus, a:hover {
 
 .form-control {
   border-radius: 2px;
-  height: 50px;
   background-color: transparent;
   color: #666;
   box-shadow: none;
@@ -470,6 +469,17 @@ button {
 
 .btn-transparent:hover {
   background: #082de1;
+  color: #fff;
+}
+
+.btn-copanimaux {
+  background: transparent;
+  color: #000000;
+  border: 2px solid #29CFF2;
+}
+
+.btn-copanimaux:hover {
+  background: #29CFF2;
   color: #fff;
 }
 
@@ -2505,7 +2515,11 @@ article.single-post p {
   margin: 100px 0 ;
 }
 
-
+.first-title{
+  font-family: "Muli", sans-serif;
+  font-size: 30px;
+  margin: 40px 0;
+}
 /***** Footer *****/
 
 .quote{
