@@ -52,7 +52,7 @@ class Animals
     #[ORM\JoinColumn(nullable: false)]
     private $arrivalReason;
 
-    #[ORM\OneToOne(inversedBy: 'animals', targetEntity: death::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'animals', targetEntity: Death::class, cascade: ['persist', 'remove'])]
     private $death;
 
     #[ORM\OneToOne(inversedBy: 'animals', targetEntity: Adoption::class, cascade: ['persist', 'remove'])]
@@ -78,6 +78,12 @@ class Animals
 
     #[ORM\ManyToOne(targetEntity: Races::class, inversedBy: 'animals')]
     private $races;
+
+    #[ORM\Column(type: 'boolean')]
+    private $identification;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $identificationNumber;
 
     public function __construct()
     {
@@ -344,6 +350,30 @@ class Animals
     public function setRaces(?Races $races): self
     {
         $this->races = $races;
+
+        return $this;
+    }
+
+    public function getIdentification(): ?bool
+    {
+        return $this->identification;
+    }
+
+    public function setIdentification(bool $identification): self
+    {
+        $this->identification = $identification;
+
+        return $this;
+    }
+
+    public function getIdentificationNumber(): ?string
+    {
+        return $this->identificationNumber;
+    }
+
+    public function setIdentificationNumber(?string $identificationNumber): self
+    {
+        $this->identificationNumber = $identificationNumber;
 
         return $this;
     }

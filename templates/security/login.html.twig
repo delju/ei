@@ -1,6 +1,6 @@
 {% extends 'layouts/admin.html.twig' %}
 
-{% block title %}Page Administrateur{% endblock %}
+{% block title %}Page Administrateur - login{% endblock %}
 
 {% block page %}
 <!-- Outer Row -->
@@ -41,9 +41,9 @@
                                 <input type="hidden" name="_csrf_token"
                                        value="{{ csrf_token('authenticate') }}"
                                 >
-                                <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                <button class="btn btn-primary btn-user btn-block" type="submit">
                                     Login
-                                </a>
+                                </button>
 
                             </form>
                         </div>
@@ -52,5 +52,6 @@
         </div>
 
     </div>
-
+    </div>
+</div>
 {% endblock %}
