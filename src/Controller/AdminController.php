@@ -4,7 +4,11 @@ namespace App\Controller;
 
 
 use App\Entity\Animals;
+use App\Entity\Message;
 use App\Form\AnimalsType;
+use App\Form\MessageType;
+use App\Repository\AnimalsRepository;
+use App\Repository\MessageRepository;
 use App\Service\PhotoUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,17 +22,31 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin-home", name="admin-home")
      */
-    public function Administration(): Response
+    public function Administration(Request $request, EntityManagerInterface $em, MessageRepository $messageRepository): Response
     {
-        return $this->render('pages/admin/messages.html.twig');
+        $messages = $messageRepository->findBy([], ['date'=> 'desc' ]);
+
+        //Création d'un nouveau message a partir du formulaire MessageTYPE dans la page contact
+        $message = new Message();
+        $form = $this->createForm(MessageType::class, $message);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($message);
+            $em->flush();
+            return $this->redirectToRoute('contact');
+        }
+        return $this->render('pages/admin/messages.html.twig',['messages'=>$messages, 'messageForm'=>$form->createView()] );
     }
 
     /**
      * @Route("/admin-lodgers", name="admin-logders")
      */
-    public function Lodgers(): Response
+    public function Lodgers(AnimalsRepository $animalsRepository): Response
     {
-        return $this->render('pages/admin/lodgers.html.twig');
+        $lodgers = $animalsRepository->findBy([], ['name'=>'asc']);
+
+
+        return $this->render('pages/admin/lodgers.html.twig', ['lodgers'=>$lodgers]);
     }
 
     /**
@@ -55,5 +73,7 @@ class AdminController extends AbstractController
          }
         return $this->render('pages/admin/add-lodgers.html.twig', ['animalsForm' => $formAnimals->createView() ]);
     }
+
+
 
 }

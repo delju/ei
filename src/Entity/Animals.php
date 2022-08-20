@@ -46,6 +46,9 @@ class Animals
     private $species;
 
     #[ORM\ManyToMany(targetEntity: GetOn::class, inversedBy: 'animals')]
+    #[ORM\JoinTable(name : 'animals_get_on')]
+    #[ORM\JoinColumn(name: "animals_id", referencedColumnName: "id")]
+    #[ORM\InverseJoinColumn(name: "get_on_id", referencedColumnName: "id")]
     private $getOn;
 
     #[ORM\ManyToOne(targetEntity: ArrivalReason::class, inversedBy: 'animals')]
@@ -76,14 +79,15 @@ class Animals
     #[ORM\JoinColumn(nullable: false)]
     private $gallery;
 
-    #[ORM\ManyToOne(targetEntity: Races::class, inversedBy: 'animals')]
-    private $races;
 
     #[ORM\Column(type: 'boolean')]
     private $identification;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $identificationNumber;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $race;
 
     public function __construct()
     {
@@ -342,17 +346,6 @@ class Animals
         return $this;
     }
 
-    public function getRaces(): ?Races
-    {
-        return $this->races;
-    }
-
-    public function setRaces(?Races $races): self
-    {
-        $this->races = $races;
-
-        return $this;
-    }
 
     public function getIdentification(): ?bool
     {
@@ -374,6 +367,23 @@ class Animals
     public function setIdentificationNumber(?string $identificationNumber): self
     {
         $this->identificationNumber = $identificationNumber;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+       return $this->name;
+    }
+
+    public function getRace(): ?string
+    {
+        return $this->race;
+    }
+
+    public function setRace(?string $race): self
+    {
+        $this->race = $race;
 
         return $this;
     }

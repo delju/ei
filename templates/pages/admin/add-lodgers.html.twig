@@ -5,8 +5,48 @@
 {% block page %}
     <!-- Outer Row -->
     <div class="row justify-content-center">
-        {{ form(animalsForm) }}
+        <div class="col-xl-10 col-lg-12 col-md-9">
+        {{ form_start(animalsForm) }}
+            {{ form_row(animalsForm.species) }}
+            {{ form_row(animalsForm.name) }}
+            {{ form_row(animalsForm.sexe) }}
+            {{ form_row(animalsForm.borthDate) }}
+            {{ form_row(animalsForm.coat) }}
+            {{ form_row(animalsForm.personality) }}
+            {{ form_row(animalsForm.getOn) }}
+            {{ form_row(animalsForm.health) }}
+            {{ form_row(animalsForm.arrivalReason) }}
+            {{ form_row(animalsForm.castrate) }}
+            {{ form_row(animalsForm.identification) }}
+            {{ form_row(animalsForm.identificationNumber) }}
+            {{ form_row(animalsForm.lastChance) }}
 
+            {% for error in animalsForm.gallery.vars.errors.form.getErrors(true) %}
+                <div class="alert">{{ error.message }}</div>
+            {% endfor %}
+
+            {{ form_label(animalsForm.gallery) }}
+
+            <ul id="photo-gallery-list" class="collection-form"
+                data-prototype="{{ form_widget(animalsForm.gallery.photos.vars.prototype)|e }}"
+                data-widget-tags="{{ '<li></li>'|e }}"
+                data-widget-counter="{{ animalsForm.gallery.photos | length }}">
+                {% for photoField in animalsForm.gallery.photos %}
+                    <li class="existantPhotos">
+                        {# ici le .value me retourne l'entité liée au champ de formulaire (une entité Photo)#}
+                        <img src="{{ asset('uploads/'~photoField.vars.value.url) }}" alt="" width="100">
+                        {{ form_widget(photoField, {'attr': {'class': 'hidden'}}) }}
+                    </li>
+                {% endfor %}
+            </ul>
+            <button type="button"
+                    class="add-another-collection-widget btn btn-primary btn-sm"
+                    data-list-selector="#photo-gallery-list">+</button>
+
+            {% do animalsForm.gallery.setRendered %}
+
+            {{ form_rest(animalsForm) }}
+        </div>
     </div>
 
 {% endblock page %}

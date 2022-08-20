@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\ArrivalReason;
 use App\Entity\GetOn;
+use App\Entity\Races;
 use App\Entity\Species;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -75,6 +76,7 @@ class AppFixtures extends Fixture
         $getOn4 = new GetOn();
         $getOn4->setName("Aucun");
         $manager->persist($getOn4);
+
 
         $manager->flush();
     }
