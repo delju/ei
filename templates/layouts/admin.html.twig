@@ -23,11 +23,11 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('admin-home') }}">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            <a class="d-flex align-items-center justify-content-center" href="{{ url('admin-home') }}">
+
+                <div class="">
+                <img class="logo" src="{{ asset('/user/images/logo.png') }}" alt="">
+</div>
             </a>
 
             <!-- Divider -->
@@ -94,22 +94,15 @@
 
                     <!-- Topbar Search -->
                     {% set searchForm = getSearchForm() %}
-                     {{ form_start(searchForm) }}
-                                {{ form_widget(searchForm.keyword) }}
 
-                                    <i class="fas fa-search fa-sm"></i>
 
-                               {{ form_end(searchForm) }}
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                         {{ form_start(searchForm) }}
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
+                           {{ form_widget(searchForm.keyword) }}
 
-                            </div>
                         </div>
-                    </form>
+                        {{ form_end(searchForm) }}
+
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">

@@ -4,11 +4,11 @@
     <div class="col-xl-12 col-lg-12 col-md-9">
         {% for lodger in lodgers %}
 
-            <div class="card m-3">
+            <div class="card m-3" style="height: 250px">
                 <div class="row no-gutters">
                     <div class="col-sm-3">
                         <a class="lodger-card" href="{{ url('admin-single', {slug: lodger.slug}) }}">
-                            <img src="{{ asset('uploads/'~lodger.gallery.photos[0].url) }}" class="card-img"
+                            <img src="{{ asset('uploads/'~lodger.gallery.photos[0].url) }}" class="card-img lodger-card-img"
                                  alt="photo">
                         </a>
                     </div>
@@ -35,13 +35,28 @@
                             </p>
                         </div>
                         {% if app.user %}
-                            <div class="card-footer">
+                            <div class="card-footer d-flex justify-content-between">
                                 <div>
                                     <ul class="list-inline justify-content-center">
                                         <li class="list-inline-item">
                                             {# Le lien pour modifier la fiche de l'animal #}
-                                            <a data-toggle="tooltip" title="Modifier"
+                                            <a data-toggle="tooltip" title="Adopté"
                                                href="{{ url('add-adoption', {id: lodger.id}) }}">
+                                                <i class="fa fa-users fa-lg"></i>
+                                            </a>
+                                        </li>
+
+                                        <li class="list-inline-item">
+                                            {# Le lien pour modifier la fiche de l'animal #}
+                                            <a data-toggle="tooltip" title="Retrouvé"
+                                               href="{{ url('add-recovered', {id: lodger.id}) }}">
+                                                <i class="fa fa-home fa-lg"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            {# Le lien pour modifier la fiche de l'animal #}
+                                            <a data-toggle="tooltip" title="Décédé"
+                                               href="{{ url('add-deceased', {id: lodger.id}) }}">
                                                 <i class="fa fa-star fa-lg"></i>
                                             </a>
                                         </li>

@@ -2549,6 +2549,10 @@ article.single-post p {
   color:#000000;
 }
 
+.lodger-card-img{
+  height:250px;
+  object-fit: cover;
+}
 
 /***Icone***/
 

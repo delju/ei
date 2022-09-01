@@ -5,10 +5,14 @@ namespace App\Controller;
 
 use App\Entity\Adoption;
 use App\Entity\Animals;
+use App\Entity\ComeBack;
+use App\Entity\Death;
 use App\Entity\Message;
 use App\Entity\Treatment;
 use App\Form\AdoptionType;
 use App\Form\AnimalsType;
+use App\Form\ComeBackType;
+use App\Form\DeathType;
 use App\Form\MessageType;
 use App\Form\TreatmentType;
 use App\Repository\AnimalsRepository;
@@ -166,6 +170,30 @@ class AdminController extends AbstractController
     }
 
     /**
+     * @Route("/admin-add-deceased/{id}", name="add-deceased")
+     */
+
+    public function addDeceased(int $id, AnimalsRepository $animalsRepository, Request $request, EntityManagerInterface $em): Response
+    {
+        $lodger = $animalsRepository->find($id);
+        $deceased = new Death();
+        $deceased->setAnimals($lodger);
+        $formDeceased = $this->createForm(DeathType::class, $deceased);
+        $formDeceased->handleRequest($request);
+        //Si formulaire est envoyé et valide on persist les commentaires et on redirige la page vers le single
+        if ($formDeceased->isSubmitted() && $formDeceased->isValid()) {
+            $em->persist($lodger->getAdoption());
+            $em->persist($lodger);
+            $em->flush();
+
+            return $this->redirectToRoute('single', ['slug' => $lodger->getSlug()]);
+        }
+
+
+        return $this->render("pages/admin/form/add-deceased.html.twig", ['deceasedForm' => $formDeceased->createView()]);
+    }
+
+    /**
      * @Route("/admin-adopted", name="adopted")
      */
 
@@ -206,6 +234,7 @@ class AdminController extends AbstractController
         return $this->render("pages/admin/form/add-adoption.html.twig", ['adoptionForm' => $formAdoption->createView()]);
     }
 
+
     /**
      * @Route("/admin-recovered", name="recovered")
      */
@@ -214,6 +243,30 @@ class AdminController extends AbstractController
     {
         $recovered = $animalsRepository->findRecovered();
         return $this->render("pages/admin/recovered.html.twig", ['lodgers'=>$recovered]);
+    }
+
+    /**
+     * @Route("/admin-add-recovered/{id}", name="add-recovered")
+     */
+
+    public function addRecovered(int $id, AnimalsRepository $animalsRepository, Request $request, EntityManagerInterface $em): Response
+    {
+        $lodger = $animalsRepository->find($id);
+        $recovered = new ComeBack();
+        $recovered->setAnimals($lodger);
+        $formRecovered = $this->createForm(ComeBackType::class, $recovered);
+        $formRecovered->handleRequest($request);
+        //Si formulaire est envoyé et valide on persist les commentaires et on redirige la page vers le single
+        if ($formRecovered->isSubmitted() && $formRecovered->isValid()) {
+            $em->persist($lodger->getAdoption());
+            $em->persist($lodger);
+            $em->flush();
+
+            return $this->redirectToRoute('single', ['slug' => $lodger->getSlug()]);
+        }
+
+
+        return $this->render("pages/admin/form/add-recovered.html.twig", ['recoveredForm' => $formRecovered->createView()]);
     }
 
 }

@@ -29,8 +29,9 @@ class DefaultController extends AbstractController
      */
     public function Adoption(AnimalsRepository $animalsRepository, Request $request): Response
     {
+        $lodgers = $animalsRepository->findAll();
 
-        return $this->render('pages/user/adoption.html.twig');
+        return $this->render('pages/user/adoption.html.twig', ['lodgers'=>$lodgers]);
     }
 
     /**
