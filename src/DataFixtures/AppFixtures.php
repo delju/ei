@@ -29,35 +29,35 @@ class AppFixtures extends Fixture
         $admin->setRoles(["ROLE_ADMIN"]);
         $manager->persist($admin);
 
-        $species1= new Species();
+        $species1 = new Species();
         $species1->setName("Chien");
         $manager->persist($species1);
 
-        $species2= new Species();
+        $species2 = new Species();
         $species2->setName("Chat");
         $manager->persist($species2);
 
-        $species3= new Species();
+        $species3 = new Species();
         $species3->setName("NAC");
         $manager->persist($species3);
 
-        $species4= new Species();
+        $species4 = new Species();
         $species4->setName("Autres");
         $manager->persist($species4);
 
-        $arrivalReason1= new ArrivalReason();
+        $arrivalReason1 = new ArrivalReason();
         $arrivalReason1->setName("Abandon");
         $manager->persist($arrivalReason1);
 
-        $arrivalReason2= new ArrivalReason();
+        $arrivalReason2 = new ArrivalReason();
         $arrivalReason2->setName("Perdu");
         $manager->persist($arrivalReason2);
 
-        $arrivalReason3= new ArrivalReason();
+        $arrivalReason3 = new ArrivalReason();
         $arrivalReason3->setName("Saisie");
         $manager->persist($arrivalReason3);
 
-        $arrivalReason4= new ArrivalReason();
+        $arrivalReason4 = new ArrivalReason();
         $arrivalReason4->setName("Né au centre");
         $manager->persist($arrivalReason4);
 

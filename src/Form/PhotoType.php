@@ -20,11 +20,10 @@ class PhotoType extends AbstractType
                 'label' => false,
                 'constraints' => [
                     new Image([
-                        'maxSize' => '4096k'
+                        'maxSize' => '6000k'
                     ])
                 ],
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

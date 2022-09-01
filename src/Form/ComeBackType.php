@@ -19,8 +19,7 @@ class ComeBackType extends AbstractType
             ->add('borthDate')
             ->add('nationalNumber')
             ->add('date')
-            ->add('animals')
-        ;
+            ->add('animals');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

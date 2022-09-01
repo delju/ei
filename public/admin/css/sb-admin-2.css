@@ -4526,6 +4526,7 @@ input[type="button"].btn-block {
   flex: 1 1 auto;
   min-height: 1px;
   padding: 1.25rem;
+  color:#000000;
 }
 
 .card-title {
@@ -10388,7 +10389,7 @@ a:focus {
   padding: 0.5rem 1rem;
   margin: 0 0.5rem;
   display: block;
-  color: #3a3b45;
+  color: #FFFFFF;
   text-decoration: none;
   border-radius: 0.35rem;
   white-space: nowrap;
@@ -10397,6 +10398,7 @@ a:focus {
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:hover,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item:hover {
   background-color: #eaecf4;
+  color:#000000;
 }
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:active,
@@ -11280,8 +11282,21 @@ body.sidebar-toggled footer.sticky-footer {
   width: 100%;
 }
 
+
+/**** AJOUTS****/
 .last-chance {
   position: absolute;
   top: -5px;
-  right: -265px;
+  right: -5px;
+}
+
+.lodger-card{
+  color:#000000;
+  text-decoration: none;
+
+}
+
+.lodger-card:hover{
+  color:#000000;
+
 }

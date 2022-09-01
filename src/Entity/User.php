@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -23,6 +25,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string')]
     private $password;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Message::class)]
+    private $messages;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Treatment::class)]
+    private $treatments;
+
+    public function __construct()
+    {
+        $this->messages = new ArrayCollection();
+        $this->treatments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -48,7 +62,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -56,7 +70,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -111,5 +125,65 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Message>
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getUser() === $this) {
+                $message->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Treatment>
+     */
+    public function getTreatments(): Collection
+    {
+        return $this->treatments;
+    }
+
+    public function addTreatment(Treatment $treatment): self
+    {
+        if (!$this->treatments->contains($treatment)) {
+            $this->treatments[] = $treatment;
+            $treatment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTreatment(Treatment $treatment): self
+    {
+        if ($this->treatments->removeElement($treatment)) {
+            // set the owning side to null (unless already changed)
+            if ($treatment->getUser() === $this) {
+                $treatment->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

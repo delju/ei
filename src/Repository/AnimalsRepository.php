@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Animals;
+use App\Search\Search;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
@@ -47,6 +48,93 @@ class AnimalsRepository extends ServiceEntityRepository
         }
     }
 
+    public function findWithAll($slug): Animals
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->select('a')
+            ->leftJoin('a.gallery', 'g')
+            ->addSelect('g')
+            ->leftJoin('a.getOn', 'go')
+            ->addSelect('go')
+            ->leftJoin('a.arrivalReason', 'ar')
+            ->addSelect('ar')
+            ->leftJoin('a.treatments', 't', 'WITH', 't.animals = a.id ')
+            ->where('a.slug = :slug')
+            ->setParameter('slug', $slug);
+
+        return $qb->getQuery()->getOneorNullResult();
+    }
+
+    public function findLastChance($limit = null)
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->andWhere('a.lastChance = true')
+            ->orderBy('a.dateArrival', 'desc');
+
+        if (false === is_null($limit))
+            $qb->setMaxResults($limit);
+
+        return $qb->getQuery()->getResult();
+
+    }
+
+    public function findDeceased()
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->where('a.death IS NOT NULL')
+            ->leftJoin('a.death', 'd')
+            ->orderBy('d.date', 'desc');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findRecovered()
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->where('a.comeBack IS NOT NULL')
+            ->leftJoin('a.comeBack', 'c')
+            ->orderBy('c.date', 'desc');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findAdopted()
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->where('a.Adoption IS NOT NULL')
+            ->leftJoin('a.Adoption', 'ad')
+            ->orderBy('ad.date', 'desc');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findBySearch(Search $search)
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->where('a.name LIKE :keyword')
+            ->setParameter('keyword', '%' . $search->getKeyword() . '%');
+
+//        if ($search->getSpecies()) {
+//            $qb->andWhere('a.species in (:species)')
+//                ->setParameter('species', $search->getSpecies());
+//        }
+//
+//        if (count($search->getGetOns())) {
+//            $qb->leftJoin('a.getOn', 'getOn', 'WITH', 'g = a')
+//                ->where('getOn.id = ')
+//                ->setParameter('getons', $search->getGetOns());
+//       }
+//
+//        $qb->andWhere('a.Sexe in (:sexe)')
+//            ->setParameter('sexe', $search->getSexe());
+//
+//        if ($search->getLastChance() == 1) {
+//            $qb->andWhere('a.lastChance in (:lastchances)')
+//                ->setParameter('lastchances', $search->getLastChance());
+//        }
+
+        return $qb->getQuery()->getResult();
+    }
 //    /**
 //     * @return Animals[] Returns an array of Animals objects
 //     */

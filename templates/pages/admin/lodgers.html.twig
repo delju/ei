@@ -3,41 +3,47 @@
 {% block title %} Admin - Pensionnaires {% endblock title %}
 
 {% block page %}
-    <!-- Outer Row -->
-    <div class="row justify-content-center">
-        <div class="col-xl-10 col-lg-12 col-md-9">
-            {% for lodger in lodgers %}
-            <div class="card m-3">
-                <div class="row no-gutters">
-                    <div class="col-sm-3">
-                        <img src="{{ asset('uploads/routebergue-62fa9d32a4cee.png') }}" class="card-img">
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="card-body">
-                            {% if lodger.lastChance %}
-                                <div class="last-chance">
-                                    <i class="fa fa-heart text-danger fa-4x" style="rotate : 30deg;"></i>
-                                </div>
-                            {% endif %}
-                            <h5 class="card-title">{{ lodger.name }} | {{ lodger.borthDate | age }} ans </h5>
-                            <h6 class="card-title">{{ lodger.races }}</h6>
-                            <ul class="list-inline">
-                                S'entend avec
-                        {% for getOns in lodger.getOn %}
-                            <li class="card-text list-inline-item badge badge-primary" >{{ getOns.name }}</li>
-                        {% endfor %}
-                            </ul>
-                            <p class="card-text">
-                                {{ lodger.personality }}
-                            </p>
-                        </div>
 
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+
+    {{ form_start(searchFullForm, {attr:{class: 'col-md-12'} }) }}
+    <div class="row">
+
+        <div class="col-md-2">
+            {{ form_widget(searchFullForm.submit) }}
+        </div>
+        <button class="btn btn-primary col-md-2" type="button" data-toggle="collapse" data-target="#collapseSearch" aria-expanded="false" aria-controls="collapseExample">
+            Affiner sa recherche
+        </button>
+    </div>
+    <div class="row mt-5 collapse" id="collapseSearch" >
+        <div class="col ">
+            <h4 class="widget-header">{{ form_label(searchFullForm.species) }}</h4>
+            {{ form_widget(searchFullForm.species) }}
+        </div>
+        <div class="col">
+            <h4 class="widget-header">Sexe</h4>
+            {{ form_widget(searchFullForm.sexe) }}
+        </div>
+        <div class="col">
+            <h4 class="widget-header">S'entend avec</h4>
+            {{ form_widget(searchFullForm.getOns) }}
+        </div>
+        <div class="col">
+            <h4 class="widget-header">Dernière chance</h4>
+            {{ form_widget(searchFullForm.lastChance) }}
         </div>
     </div>
+
+    {{ form_end(searchFullForm) }}
+
+    <div class="d-flex flex-row-reverse">
+        <a data-placement="top" title="Ajouter" class="add " href="{{ url('add-lodgers') }}"
+           style="margin: 20px 50px 30px 0;">
+            <i class="fa fa-plus-circle fa-2x"></i>
+        </a>
+    </div>
+
+    {% include 'elements/lodgers-card.html.twig' %}
 
 {% endblock page %}
 

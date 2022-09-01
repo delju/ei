@@ -16,8 +16,7 @@ class ContactType extends AbstractType
             ->add('firstName')
             ->add('mail')
             ->add('mobile')
-            ->add('message')
-        ;
+            ->add('message');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

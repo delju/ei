@@ -6,9 +6,10 @@
     <!-- Outer Row -->
     <div class="row justify-content-center">
         <div class="col-xl-10 col-lg-12 col-md-9">
-        {{ form_start(animalsForm) }}
-            {{ form_row(animalsForm.species) }}
+            {{ form_start(animalsForm) }}
             {{ form_row(animalsForm.name) }}
+            {{ form_row(animalsForm.species) }}
+            {{ form_row(animalsForm.race) }}
             {{ form_row(animalsForm.sexe) }}
             {{ form_row(animalsForm.borthDate) }}
             {{ form_row(animalsForm.coat) }}
@@ -33,7 +34,7 @@
                 data-widget-counter="{{ animalsForm.gallery.photos | length }}">
                 {% for photoField in animalsForm.gallery.photos %}
                     <li class="existantPhotos">
-                        {# ici le .value me retourne l'entité liée au champ de formulaire (une entité Photo)#}
+                        {# ici le .value me retourne l'entité liée au champ de formulaire (une entité Photo) #}
                         <img src="{{ asset('uploads/'~photoField.vars.value.url) }}" alt="" width="100">
                         {{ form_widget(photoField, {'attr': {'class': 'hidden'}}) }}
                     </li>
@@ -41,7 +42,8 @@
             </ul>
             <button type="button"
                     class="add-another-collection-widget btn btn-primary btn-sm"
-                    data-list-selector="#photo-gallery-list">+</button>
+                    data-list-selector="#photo-gallery-list">+
+            </button>
 
             {% do animalsForm.gallery.setRendered %}
 

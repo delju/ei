@@ -397,7 +397,6 @@ button {
   color: #333;
   display: inline-block;
   padding: 7px 12px;
-  color: #fff;
 }
 
 .social-media-icons ul li .twitter {
@@ -532,7 +531,7 @@ button {
 .card-main {
   border-radius: 2px;
   border: none;
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
 .mb-30 {
@@ -586,7 +585,7 @@ ul.pagination li a {
   line-height: 40px;
   text-align: center;
   border-color: transparent;
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   color: #666;
 }
 
@@ -644,23 +643,6 @@ ul.pagination .active a {
   background: #F5F5F5;
 }
 
-.bg-1 {
-  background: url("../images/home/hero.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.bg-2 {
-  background: url(../images/subscription/subscription-back.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.bg-3 {
-  background: url(../images/call-to-action/cta-background.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 
 .bg-4 {
   background: #5672f9;
@@ -691,6 +673,7 @@ ul.pagination .active a {
   font-size: 16px;
   line-height: 43px;
   padding: 0 75px;
+  color:#000000;
 }
 
 .main-nav .nav-item .nav-link span {
@@ -1358,6 +1341,7 @@ ul.pagination .active a {
 
 .product-item .card .card-body {
   padding: 20px;
+
 }
 
 .product-item .card .card-body .card-title {
@@ -2519,6 +2503,59 @@ article.single-post p {
   font-family: "Muli", sans-serif;
   font-size: 30px;
   margin: 40px 0;
+
+}
+/***Page Home**/
+
+.title-home{
+  font-family: "Muli", sans-serif;
+  font-size: 40px;
+  color: #ffffff;
+  margin-top: 200px;
+}
+
+.text-slide{
+  position: relative;
+  bottom: -230px;
+  height: 257px;
+}
+.text-slide p{
+  font-family: "Muli", sans-serif;
+  font-size: 20px;
+  color:#ffffff;
+  text-align: center;
+}
+
+#myCarousel{
+  position: absolute;
+  z-index: -1;
+  top:0px;
+  width: 100%;
+}
+
+.carousel-inner img{
+  width: 100%;
+  height:100%;
+
+}
+/*****Element*****/
+/***Card***/
+.lodger-card{
+  color:#000000;
+  text-decoration: none;
+}
+
+.lodger-card:hover{
+  color:#000000;
+}
+
+
+/***Icone***/
+
+.last-chance {
+  position: absolute;
+  top: -5px;
+  right: -5px;
 }
 /***** Footer *****/
 

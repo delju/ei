@@ -39,6 +39,10 @@ class Adoption
     #[Gedmo\Timestampable(on: 'create')]
     private $date;
 
+    #[ORM\OneToOne(targetEntity: Gallery::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private $gallery;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -146,6 +150,18 @@ class Adoption
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getGallery(): ?Gallery
+    {
+        return $this->gallery;
+    }
+
+    public function setGallery(Gallery $gallery): self
+    {
+        $this->gallery = $gallery;
 
         return $this;
     }

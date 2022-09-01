@@ -1,0 +1,47 @@
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %} Admin - Ajouter une adoption{% endblock title %}
+
+{% block page %}
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-12 col-md-9">
+            {{ form_start(adoptionForm) }}
+            {{ form_row(adoptionForm.lastName) }}
+            {{ form_row(adoptionForm.firstName) }}
+            {{ form_row(adoptionForm.Address) }}
+            {{ form_row(adoptionForm.mobile) }}
+            {{ form_row(adoptionForm.borthDate) }}
+            {{ form_row(adoptionForm.nationalNumber) }}
+
+            {% for error in adoptionForm.gallery.vars.errors.form.getErrors(true) %}
+                <div class="alert">{{ error.message }}</div>
+            {% endfor %}
+
+            {{ form_label(adoptionForm.gallery) }}
+
+            <ul id="photo-gallery-list" class="collection-form"
+                data-prototype="{{ form_widget(adoptionForm.gallery.photos.vars.prototype)|e }}"
+                data-widget-tags="{{ '<li></li>'|e }}"
+                data-widget-counter="{{ adoptionForm.gallery.photos | length }}">
+                {% for photoField in adoptionForm.gallery.photos %}
+                    <li class="existantPhotos">
+                        {# ici le .value me retourne l'entité liée au champ de formulaire (une entité Photo) #}
+                        <img src="{{ asset('uploads/'~photoField.vars.value.url) }}" alt="" width="100">
+                        {{ form_widget(photoField, {'attr': {'class': 'hidden'}}) }}
+                    </li>
+                {% endfor %}
+            </ul>
+            <button type="button"
+                    class="add-another-collection-widget btn btn-primary btn-sm"
+                    data-list-selector="#photo-gallery-list">+
+            </button>
+
+            {% do adoptionForm.gallery.setRendered %}
+            {{ form_end(adoptionForm) }}
+
+        </div>
+    </div>
+
+{% endblock %}

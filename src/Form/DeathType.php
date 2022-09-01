@@ -14,8 +14,7 @@ class DeathType extends AbstractType
         $builder
             ->add('date')
             ->add('cause')
-            ->add('animals')
-        ;
+            ->add('animals');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

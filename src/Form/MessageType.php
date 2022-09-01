@@ -13,10 +13,9 @@ class MessageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', null, ['label'=>'Titre'])
-            ->add('content', null,['label'=>'Message'])
-            ->add('submit', SubmitType::class, ['label'=>'Envoyé'])
-        ;
+            ->add('title', null, ['label' => 'Titre'])
+            ->add('content', null, ['label' => 'Message'])
+            ->add('submit', SubmitType::class, ['label' => 'Envoyé']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\MessageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\Blameable;
 use Gedmo\Mapping\Annotation\Timestampable;
 
 #[ORM\Entity(repositoryClass: MessageRepository::class)]
@@ -23,6 +24,10 @@ class Message
 
     #[ORM\Column(type: 'text')]
     private $content;
+
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'messages')]
+    #[Blameable(on: 'create')]
+    private $user;
 
     public function getId(): ?int
     {
@@ -69,7 +74,20 @@ class Message
      * @ORM\PrePersist
      */
 
-    public function prePersis() :void{
+    public function prePersis(): void
+    {
         $this->date = new \DateTime();
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

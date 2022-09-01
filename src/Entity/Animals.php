@@ -46,7 +46,7 @@ class Animals
     private $species;
 
     #[ORM\ManyToMany(targetEntity: GetOn::class, inversedBy: 'animals')]
-    #[ORM\JoinTable(name : 'animals_get_on')]
+    #[ORM\JoinTable(name: 'animals_get_on')]
     #[ORM\JoinColumn(name: "animals_id", referencedColumnName: "id")]
     #[ORM\InverseJoinColumn(name: "get_on_id", referencedColumnName: "id")]
     private $getOn;
@@ -72,7 +72,7 @@ class Animals
     private $dateArrival;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Slug(fields: ['name'], updatable: false )]
+    #[Slug(fields: ['name'], updatable: false)]
     private $slug;
 
     #[ORM\OneToOne(inversedBy: 'animals', targetEntity: Gallery::class, cascade: ['persist', 'remove'])]
@@ -373,7 +373,7 @@ class Animals
 
     public function __toString(): string
     {
-       return $this->name;
+        return $this->name;
     }
 
     public function getRace(): ?string

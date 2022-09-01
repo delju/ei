@@ -17,8 +17,7 @@ class GalleryType extends AbstractType
                 'entry_type' => PhotoType::class,
                 'allow_add' => true,
                 'allow_delete' => true
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

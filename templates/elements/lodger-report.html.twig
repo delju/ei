@@ -1,0 +1,78 @@
+{# includes/lodger-report.html.twig #}
+
+
+<div class="row no-gutters mb-5">
+    <div class="col-md-4">
+        <div id="carouselExampleIndicators" class="product-slider carousel slide"
+             data-ride="carousel">
+            <ol class="carousel-indicators">
+                {% for i in 0..single.gallery.photos|length %}
+                    <li data-target="#carouselExampleIndicators" data-slide-to="{{ i }}"
+                        class="active"></li>
+                {% endfor %}
+            </ol>
+            <div class="carousel-inner">
+                {% for photo in single.gallery.photos %}
+                    <div class="carousel-item {% if loop.first %} active{% endif %}">
+                        <img class="d-block w-100" data-photoswipe-loop="{{ loop.index0 }}"
+                             src="{{ asset('uploads/'~photo.url) }}"
+                             alt="First slide">
+                    </div>
+                {% endfor %}
+
+            </div>
+
+            {% if single.gallery.photos|length > 1 %}
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                   data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                   data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card-body">
+            <div class="product-details">
+                <h5 class="card-title">{{ single.name }} | {{ single.borthDate | age }} an(s)</h5>
+                <div class="product-meta">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">{{ single.race }}</li>
+                        <li class="list-inline-item">{{ single.coat }}</li>
+                        <li class="list-inline-item">{% if single.sexe %}Femelle{% else %}Mâle{% endif %}</li>
+                        <li class="list-inline-item"> {{ single.identificationNumber }}</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="card-text">
+                        S'entend avec:    <ul>
+                        {% for getOns in single.getOn %}
+                            <li>{{ getOns.name }} </li>
+                        {% endfor %}
+                    </ul>
+                    </div>
+                </div>
+                <div>
+                    <p class="card-text mb-4">
+                        Caractère:<br> {{ single.personality }}
+                    </p>
+                </div>
+                <div>
+                    <p class="card-text mb-4">
+                        Santé:<br> {{ single.health }}
+                    </p>
+                </div>
+                <div>
+                    <p class="card-text">
+                        Raison de son admission:<br> {{ single.arrivalReason.name}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
