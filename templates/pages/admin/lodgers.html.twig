@@ -7,13 +7,17 @@
 
     {{ form_start(searchFullForm, {attr:{class: 'col-md-12'} }) }}
     <div class="row">
-
+        <div class="col-md-8">
+        {{ form_widget(searchFullForm.keyword) }}
+        </div>
         <div class="col-md-2">
             {{ form_widget(searchFullForm.submit) }}
         </div>
         <button class="btn btn-primary col-md-2" type="button" data-toggle="collapse" data-target="#collapseSearch" aria-expanded="false" aria-controls="collapseExample">
             Affiner sa recherche
         </button>
+
+
     </div>
     <div class="row mt-5 collapse" id="collapseSearch" >
         <div class="col ">

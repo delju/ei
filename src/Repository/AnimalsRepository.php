@@ -124,11 +124,10 @@ class AnimalsRepository extends ServiceEntityRepository
                 ->setParameter('species', $search->getSpecies());
         }
 
-//        if (count($search->getGetOns())) {
-//            $qb->leftJoin('a.getOn', 'g')
-//                ->andWhere('g.id = :gId')
-//                ->setParameter('gId', $search->getGetOns());
-//       }
+        if (count($search->getGetOns())) {
+            $qb->andWhere('a.getOn in (:geton)')
+                ->setParameter('geton', $search->getGetOns());
+       }
 
         if ($search->getLastChance() == 1) {
             $qb->andWhere('a.lastChance in (:lastchances)')

@@ -17,6 +17,7 @@ class SearchFullType extends SearchType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
         $builder
             ->add('species', EntityType::class, ['class'=>Species::class, 'required'=> false])
             ->add('sexe', ChoiceType::class, ['choices' => ['Mâle' => false, 'Femelle' => true],'multiple'=>true, 'expanded'=>true ,'required'=>true])
