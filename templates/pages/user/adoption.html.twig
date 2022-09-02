@@ -3,11 +3,79 @@
 
 {% block page %}
 
-    <section class="page">
+    <section class="m-page">
         <div class="container">
 
+            {{ form_start(searchFullForm, {attr:{class: 'col-md-12'} }) }}
 
-            {% include 'elements/lodgers-card.html.twig' with { urlSingle: '{{ url(\'single\' , {slug: lodger.slug}) }}'} %}
+            <div class="row mt-5" >
+                <div class="col ">
+                    <h4 class="widget-header">{{ form_label(searchFullForm.species) }}</h4>
+                    {{ form_widget(searchFullForm.species) }}
+                </div>
+                <div class="col">
+                    <h4 class="widget-header">Sexe</h4>
+                    {{ form_widget(searchFullForm.sexe) }}
+                </div>
+                <div class="col">
+                    <h4 class="widget-header">S'entend avec</h4>
+                    {{ form_widget(searchFullForm.getOns) }}
+                </div>
+                <div class="col">
+                    <h4 class="widget-header">Dernière chance</h4>
+                    {{ form_widget(searchFullForm.lastChance) }}
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                {{ form_widget(searchFullForm.submit) }}
+            </div>
+
+            {{ form_end(searchFullForm) }}
+
+            <div class="row justify-content-center">
+                <div class="col-xl-12 col-lg-12 col-md-9">
+                    {% for lodger in lodgers %}
+
+                        <div class="card m-3" style="height: 250px">
+                            <div class="row no-gutters">
+                                <div class="col-sm-3">
+                                    <a class="lodger-card" href="{{ url('single', {slug: lodger.slug}) }}">
+                                        <img src="{{ asset('uploads/'~lodger.gallery.photos[0].url) }}" class="card-img lodger-card-img"
+                                             alt="photo">
+                                    </a>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="card-body">
+                                        {% if lodger.lastChance %}
+                                            <div class="last-chance">
+                                                <i class="fa fa-heart text-danger fa-4x" style="rotate : 30deg;"></i>
+                                            </div>
+                                        {% endif %}
+                                        <h5 class="card-title">
+                                            <a class="lodger-card"
+                                               href="{{ url('single', {slug: lodger.slug}) }}">{{ lodger.name | capitalize }}</a>| {{ lodger.borthDate | age }}
+                                            ans </h5>
+                                        <h6 class="card-text">Race: {{ lodger.race }}</h6>
+                                        <ul class="list-inline">
+                                            S'entend avec
+                                            {% for getOns in lodger.getOn %}
+                                                <li class="card-text list-inline-item badge badge-primary">{{ getOns.name }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                        <p class="card-text">
+                                            {{ lodger.personality }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- pagination -->
+                <div class="self-pagination pagination justify-content-center">
+                    {{ knp_pagination_render(lodgers) }}
+                </div>
+            </div>
 
         </div>
     </section>

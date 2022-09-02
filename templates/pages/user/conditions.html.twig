@@ -3,12 +3,28 @@
 
 {% block page %}
 
-    <section class="page">
+    <section class="m-page">
         <div class="container">
 
-            <h1>
+            <h1 class="first-title">
                 Conditions
             </h1>
+
+            <div class="row ">
+                <div class="col-6 conditions m-auto">
+                  <p>Pour pouvoir adopter un de nos pensionnaires il vous faudra:</p>
+                    <ul>
+                        <li>Vos documents d'identité</li>
+                        <li>Le permis de détention</li>
+                        <li>La somme de 200€(Chien)/<br>130€(Chat et NAC)/<br>80€(Les animaux de la dernière chance)</li>
+                    </ul>
+                </div>
+                <div class="col-6">
+                    <img class="w-100" src="{{ asset('user/images/home/funny-pets.jpg') }}" alt="">
+                </div>
+
+
+            </div>
 
         </div>
     </section>

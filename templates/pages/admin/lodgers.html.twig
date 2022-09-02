@@ -45,6 +45,11 @@
 
     {% include 'elements/lodgers-card.html.twig' %}
 
+    <!-- pagination -->
+    <div class="self-pagination row justify-content-center ">
+        {{ knp_pagination_render(lodgers) }}
+    </div>
+
 {% endblock page %}
 
 

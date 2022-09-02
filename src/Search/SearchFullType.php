@@ -19,25 +19,13 @@ class SearchFullType extends SearchType
     {
         $builder
             ->add('species', EntityType::class, ['class'=>Species::class, 'required'=> false])
-            ->add('sexe', ChoiceType::class, ['choices' => ['Mâle' => false, 'Femelle' => true],'multiple'=>false, 'expanded'=>true ,'required'=>false])
+            ->add('sexe', ChoiceType::class, ['choices' => ['Mâle' => false, 'Femelle' => true],'multiple'=>true, 'expanded'=>true ,'required'=>true])
             ->add('getOns', EntityType::class, ['class'=>GetOn::class, 'required'=> false, 'multiple' => true, 'expanded' => true])
             ->add('lastChance', CheckboxType::class, ['required'=>false])
             ->add('submit', SubmitType::class, ['label'=>'Recherche'])
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'method' => 'GET',
-            'csrf_protection'=> false,
-            'data_class' => Search::class,
-        ]);
-    }
 
-    public function getBlockPrefix(): string
-    {
-        return '';
-    }
 
 }

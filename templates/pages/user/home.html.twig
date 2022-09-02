@@ -4,7 +4,7 @@
 {% block page %}
 
 
-    <section class="page">
+    <section class="m-page">
         <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -36,8 +36,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="section-title">
-                        Les adoptions de la dernière chance
+                    <div class="text-center">
+                        <h4>Les adoptions de la dernière chance</h4>
                     </div>
                     <p>
                         Ces animaux n'ont pas toujours eu la vie facile, et aujourd'hui, par vieillesse ou maladie, ils
@@ -63,10 +63,13 @@
                                                      alt="Card image cap">
                                             </a>
                                         </div>
-                                        <div class="card-body">
-                                            <h4 class="card-title"><a
-                                                        href="{{ url('single', {slug: lastChances.slug}) }}">{{ lastChances.name }}</a>
+                                        <div class="card-body text-center">
+                                            <h4 class="card-title ">
+                                                <a class="lodger-card" href="{{ url('single', {slug: lastChances.slug}) }}">{{ lastChances.name | capitalize}} | {{ lastChances.borthdate | age }} an(s)</a>
                                             </h4>
+                                            <p >
+                                                {{ lastChances.race }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

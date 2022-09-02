@@ -111,27 +111,33 @@ class AnimalsRepository extends ServiceEntityRepository
     public function findBySearch(Search $search)
     {
         $qb = $this->createQueryBuilder('a')
-            ->where('a.name LIKE :keyword')
+            ->where('a.Adoption IS NULL')
+            ->andWhere('a.comeBack IS NULL')
+            ->andWhere('a.death IS NULL')
+
+            ->andWhere('a.name LIKE :keyword')
             ->setParameter('keyword', '%' . $search->getKeyword() . '%');
 
-//        if ($search->getSpecies()) {
-//            $qb->andWhere('a.species in (:species)')
-//                ->setParameter('species', $search->getSpecies());
-//        }
-//
+
+        if (count($search->getSexe())){
+        $qb->andWhere('a.Sexe in (:sexe)')
+            ->setParameter('sexe', $search->getSexe());
+    }
+        if ($search->getSpecies()) {
+            $qb->andWhere('a.species in (:species)')
+                ->setParameter('species', $search->getSpecies());
+        }
+
 //        if (count($search->getGetOns())) {
-//            $qb->leftJoin('a.getOn', 'getOn', 'WITH', 'g = a')
-//                ->where('getOn.id = ')
-//                ->setParameter('getons', $search->getGetOns());
+//            $qb->leftJoin('a.getOn', 'g')
+//                ->andWhere('g.id = :gId')
+//                ->setParameter('gId', $search->getGetOns());
 //       }
-//
-//        $qb->andWhere('a.Sexe in (:sexe)')
-//            ->setParameter('sexe', $search->getSexe());
-//
-//        if ($search->getLastChance() == 1) {
-//            $qb->andWhere('a.lastChance in (:lastchances)')
-//                ->setParameter('lastchances', $search->getLastChance());
-//        }
+
+        if ($search->getLastChance() == 1) {
+            $qb->andWhere('a.lastChance in (:lastchances)')
+                ->setParameter('lastchances', $search->getLastChance());
+        }
 
         return $qb->getQuery()->getResult();
     }

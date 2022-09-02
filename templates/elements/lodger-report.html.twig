@@ -1,19 +1,19 @@
 {# includes/lodger-report.html.twig #}
 
 
-<div class="row no-gutters mb-5">
+<div class="row mb-5">
     <div class="col-md-4">
-        <div id="carouselExampleIndicators" class="product-slider carousel slide"
-             data-ride="carousel">
+        <div id="carouselIndicators" class="carousel slide"
+             data-bs-ride="carousel">
             <ol class="carousel-indicators">
                 {% for i in 0..single.gallery.photos|length %}
-                    <li data-target="#carouselExampleIndicators" data-slide-to="{{ i }}"
+                    <li data-target="#carouselIndicators" data-slide-to="{{ i }}"
                         class="active"></li>
                 {% endfor %}
             </ol>
             <div class="carousel-inner">
                 {% for photo in single.gallery.photos %}
-                    <div class="carousel-item {% if loop.first %} active{% endif %}">
+                    <div class="carousel-item {% if loop.first %}active{% endif %}">
                         <img class="d-block w-100" data-photoswipe-loop="{{ loop.index0 }}"
                              src="{{ asset('uploads/'~photo.url) }}"
                              alt="First slide">
@@ -23,13 +23,13 @@
             </div>
 
             {% if single.gallery.photos|length > 1 %}
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
-                   data-slide="prev">
+                <a class="carousel-control-prev" href="#carouselIndicators" role="button"
+                   data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                 </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
-                   data-slide="next">
+                <a class="carousel-control-next" href="#carouselIndicators" role="button"
+                   data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
@@ -39,7 +39,7 @@
     <div class="col-md-8">
         <div class="card-body">
             <div class="product-details">
-                <h5 class="card-title">{{ single.name }} | {{ single.borthDate | age }} an(s)</h5>
+                <h5 class="card-title">{{ single.name | capitalize }} | {{ single.borthDate | age }} an(s)</h5>
                 <div class="product-meta">
                     <ul class="list-inline">
                         <li class="list-inline-item">{{ single.race }}</li>
@@ -48,28 +48,33 @@
                         <li class="list-inline-item"> {{ single.identificationNumber }}</li>
                     </ul>
                 </div>
-                <div>
-                    <div class="card-text">
-                        S'entend avec:    <ul>
+
+                <div class="card-text">
+                    S'entend avec:
+                    <ul class="p-0">
                         {% for getOns in single.getOn %}
-                            <li>{{ getOns.name }} </li>
+                            <li class="card-text list-inline-item badge badge-primary">{{ getOns.name }} </li>
                         {% endfor %}
                     </ul>
-                    </div>
                 </div>
+
+                <hr>
                 <div>
                     <p class="card-text mb-4">
                         Caractère:<br> {{ single.personality }}
                     </p>
                 </div>
+                <hr>
                 <div>
                     <p class="card-text mb-4">
                         Santé:<br> {{ single.health }}
+                        <br>{% if single.castrate %} Castré(e){% else %} Pas castré(e){% endif %}
                     </p>
                 </div>
+                <hr>
                 <div>
                     <p class="card-text">
-                        Raison de son admission:<br> {{ single.arrivalReason.name}}
+                        Raison de son admission:<br> {{ single.arrivalReason.name }}
                     </p>
                 </div>
             </div>

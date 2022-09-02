@@ -2495,14 +2495,14 @@ article.single-post p {
 
 /***** Section *****/
 
-.page{
+.m-page{
   margin: 100px 0 ;
 }
 
 .first-title{
   font-family: "Muli", sans-serif;
   font-size: 30px;
-  margin: 40px 0;
+  margin: 100px 0 40px 0;
 
 }
 /***Page Home**/
@@ -2538,8 +2538,42 @@ article.single-post p {
   height:100%;
 
 }
+
+/***Section LastChance***/
+.last-chance-section{
+  padding: 50px 0;
+}
+
+/*****Page Conditions*****/
+
+.conditions{
+  padding: 30px;
+}
+
+.conditions p, .conditions li {
+  color: #000000;
+  font-family: "Muli", sans-serif;
+  font-size: 16px;
+
+}
+
+.conditions ul{
+  padding-left: 40px ;
+}
+
+.conditions li{
+  list-style-type: disc;
+  margin: 10px 0;
+}
+
 /*****Element*****/
 /***Card***/
+.card p {
+  font-family: "Muli", sans-serif;
+  font-size: 16px;
+  color: #000000;
+}
+
 .lodger-card{
   color:#000000;
   text-decoration: none;
@@ -2561,6 +2595,27 @@ article.single-post p {
   top: -5px;
   right: -5px;
 }
+
+/***pagination***/
+.self-pagination span {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  border: 1px solid #ddd; /* Gray */
+}
+
+.self-pagination a {
+  text-decoration: none;
+}
+.pagination span.current {
+  background-color: #4e73df;
+  color: white;
+}
+
+.self-pagination span:hover:not(.current) {
+  background-color: #ddd;
+}
+
 /***** Footer *****/
 
 .quote{

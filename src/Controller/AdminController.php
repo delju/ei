@@ -21,6 +21,7 @@ use App\Search\Search;
 use App\Search\SearchFullType;
 use App\Service\PhotoUploader;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,7 +33,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin-home", name="admin-home")
      */
-    public function Administration(Request $request, EntityManagerInterface $em, MessageRepository $messageRepository): Response
+    public function Administration(Request $request, EntityManagerInterface $em, MessageRepository $messageRepository, PaginatorInterface $paginator): Response
     {
         $messages = $messageRepository->findBy([], ['date' => 'desc']);
 
@@ -45,34 +46,47 @@ class AdminController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('admin-home');
         }
-        return $this->render('pages/admin/messages.html.twig', ['messages' => $messages, 'messageForm' => $form->createView()]);
+
+        $pagination = $paginator->paginate(
+            $messages, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            2/*limit per page*/);
+
+        return $this->render('pages/admin/messages.html.twig', ['messages' => $pagination, 'messageForm' => $form->createView()]);
     }
 
     /**
      * @Route("/admin-lodgers", name="admin-lodgers")
      */
-    public function Lodgers(AnimalsRepository $animalsRepository, Request $request): Response
+    public function Lodgers(AnimalsRepository $animalsRepository, Request $request, PaginatorInterface $paginator): Response
     {
         //Création d'un recherche
         $search = new Search();
         //Retourne le formulaire de recherche
         $form = $this->createForm(SearchFullType::class, $search);
         $form->handleRequest($request);
-        $result = [];
         //Si le formulaire est envoyé et valide, on effectue la recherche selon les critères de findbysearch
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()){
            $result = $animalsRepository->findBySearch($search);
+        }else{
+            $result = $animalsRepository->findAll();
         }
 
+        $pagination = $paginator->paginate(
+            $result,
+            $request->query->getInt('page', 1),
+            10);
 
-        return $this->render('pages/admin/lodgers.html.twig', ['lodgers' => $result, 'searchFullForm'=>$form->createView()]);
+
+
+        return $this->render('pages/admin/lodgers.html.twig', ['lodgers' => $pagination, 'searchFullForm'=>$form->createView()]);
     }
 
     /**
      * @Route("/admin-single/{slug}", name="admin-single")
      */
 
-    public function Single(string $slug, AnimalsRepository $animalsRepository,Request $request, EntityManagerInterface $em): Response
+    public function Single(string $slug, AnimalsRepository $animalsRepository,Request $request, EntityManagerInterface $em, PaginatorInterface $paginator): Response
     {
 //    Trouver l'animal selon son slug.
         $single = $animalsRepository->findWithAll($slug);
@@ -87,6 +101,7 @@ class AdminController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('admin-single', ['slug' => $single->getSlug()]);
         }
+
 
         return $this->render('pages/admin/single.html.twig', ['single' => $single, 'caresForm'=>$formCares->createView()]);
     }
@@ -163,10 +178,15 @@ class AdminController extends AbstractController
      * @Route("/admin-deceased", name="deceased")
      */
 
-    public function Deceased(AnimalsRepository $animalsRepository): Response
+    public function Deceased(AnimalsRepository $animalsRepository, Request $request, PaginatorInterface $paginator): Response
     {
         $deceased = $animalsRepository->findDeceased();
-        return $this->render("pages/admin/deceased.html.twig", ['lodgers'=>$deceased]);
+
+        $pagination = $paginator->paginate(
+            $deceased,
+            $request->query->getInt('page', 1),
+            10);
+        return $this->render("pages/admin/deceased.html.twig", ['lodgers'=>$pagination]);
     }
 
     /**
@@ -197,11 +217,15 @@ class AdminController extends AbstractController
      * @Route("/admin-adopted", name="adopted")
      */
 
-    public function Adopted(AnimalsRepository $animalsRepository): Response
+    public function Adopted(AnimalsRepository $animalsRepository, Request $request, PaginatorInterface $paginator): Response
     {
         $adopted = $animalsRepository->findAdopted();
+        $pagination = $paginator->paginate(
+            $adopted,
+            $request->query->getInt('page', 1),
+            10);
 
-        return $this->render("pages/admin/adopted.html.twig", ['lodgers' => $adopted]);
+        return $this->render("pages/admin/adopted.html.twig", ['lodgers' => $pagination]);
     }
 
     /**
@@ -239,10 +263,14 @@ class AdminController extends AbstractController
      * @Route("/admin-recovered", name="recovered")
      */
 
-    public function Recovered(AnimalsRepository $animalsRepository): Response
+    public function Recovered(AnimalsRepository $animalsRepository, Request $request, PaginatorInterface $paginator): Response
     {
         $recovered = $animalsRepository->findRecovered();
-        return $this->render("pages/admin/recovered.html.twig", ['lodgers'=>$recovered]);
+        $pagination = $paginator->paginate(
+            $recovered,
+            $request->query->getInt('page', 1),
+            10);
+        return $this->render("pages/admin/recovered.html.twig", ['lodgers'=>$pagination]);
     }
 
     /**
