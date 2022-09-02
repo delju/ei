@@ -69,7 +69,7 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
            $result = $animalsRepository->findBySearch($search);
         }else{
-            $result = $animalsRepository->findAll();
+            $result = $animalsRepository->findAllInAdoption();
         }
 
         $pagination = $paginator->paginate(

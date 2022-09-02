@@ -7,24 +7,24 @@
         <div class="container">
 
             {{ form_start(searchFullForm, {attr:{class: 'col-md-12'} }) }}
-            <div class="col-md-8">
-                {{ form_widget(searchFullForm.keyword) }}
-            </div>
 
+            <div class="d-flex justify-content-center">
+                {{ form_widget(searchFullForm.keyword, {attr:{class:'col-md-8'}}) }}
+            </div>
             <div class="row mt-5" >
-                <div class="col ">
-                    <h4 class="widget-header">{{ form_label(searchFullForm.species) }}</h4>
+                <div class="col card border-left-primary shadow py-2 m-2">
+                    <h4 class="widget-header">Espèce</h4>
                     {{ form_widget(searchFullForm.species) }}
                 </div>
-                <div class="col">
+                <div class="col card border-left-danger shadow py-2 m-2">
                     <h4 class="widget-header">Sexe</h4>
                     {{ form_widget(searchFullForm.sexe) }}
                 </div>
-                <div class="col">
+                <div class="col card border-left-success shadow py-2 m-2">
                     <h4 class="widget-header">S'entend avec</h4>
                     {{ form_widget(searchFullForm.getOns) }}
                 </div>
-                <div class="col">
+                <div class="col card border-left-warning shadow  py-2 m-2">
                     <h4 class="widget-header">Dernière chance</h4>
                     {{ form_widget(searchFullForm.lastChance) }}
                 </div>

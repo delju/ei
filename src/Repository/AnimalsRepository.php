@@ -48,6 +48,16 @@ class AnimalsRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAllInAdoption()
+    {
+        $qb = $this->createQueryBuilder('a')
+            ->where('a.Adoption is NULL')
+            ->andWhere('a.death is NULL')
+            ->andWhere('a.comeBack is NULL');
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findWithAll($slug): Animals
     {
         $qb = $this->createQueryBuilder('a')
@@ -68,6 +78,9 @@ class AnimalsRepository extends ServiceEntityRepository
     public function findLastChance($limit = null)
     {
         $qb = $this->createQueryBuilder('a')
+            ->where('a.Adoption is NULL')
+            ->andWhere('a.comeBack is NULL')
+            ->andWhere('a.death is NULL')
             ->andWhere('a.lastChance = true')
             ->orderBy('a.dateArrival', 'desc');
 
@@ -125,14 +138,19 @@ class AnimalsRepository extends ServiceEntityRepository
         }
 
         if (count($search->getGetOns())) {
-            $qb->andWhere('a.getOn in (:geton)')
+            $qb->leftJoin('a.getOn', 'get_on')
+                ->andWhere('get_on in (:geton)')
                 ->setParameter('geton', $search->getGetOns());
-       }
+        }
 
         if ($search->getLastChance() == 1) {
             $qb->andWhere('a.lastChance in (:lastchances)')
                 ->setParameter('lastchances', $search->getLastChance());
         }
+
+        $qb->andWhere('a.Adoption is NULL')
+            ->andWhere('a.comeBack is NULL')
+            ->andWhere('a.death is NULL');
 
         return $qb->getQuery()->getResult();
     }

@@ -13,7 +13,7 @@ class SearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('keyword')
+            ->add('keyword', null, ['attr'=>['placeholder'=>'Recherche par nom']])
         ;
     }
 

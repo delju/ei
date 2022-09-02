@@ -44,7 +44,7 @@ class DefaultController extends AbstractController
             $result = $animalsRepository->findBySearch($search);
         } else {
         //Si non on affiche une liste
-            $result = $animalsRepository->findAll();
+            $result = $animalsRepository->findAllInAdoption();
         }
         //Pagination des résultats
         $pagination = $paginator->paginate(
