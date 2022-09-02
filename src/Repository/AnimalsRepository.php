@@ -111,10 +111,6 @@ class AnimalsRepository extends ServiceEntityRepository
     public function findBySearch(Search $search)
     {
         $qb = $this->createQueryBuilder('a')
-            ->where('a.Adoption IS NULL')
-            ->andWhere('a.comeBack IS NULL')
-            ->andWhere('a.death IS NULL')
-
             ->andWhere('a.name LIKE :keyword')
             ->setParameter('keyword', '%' . $search->getKeyword() . '%');
 

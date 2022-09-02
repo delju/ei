@@ -69,13 +69,13 @@ class Search
     /**
      * @param mixed $lastChance
      */
-    public function setLastChance($lastChance): void
+    public function setLastChance(mixed $lastChance): void
     {
         $this->lastChance = $lastChance;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getKeyword(): ?string
     {
@@ -83,7 +83,7 @@ class Search
     }
 
     /**
-     * @param string $keyword
+     * @param string|null $keyword
      */
     public function setKeyword(?string $keyword): void
     {

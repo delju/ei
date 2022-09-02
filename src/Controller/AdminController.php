@@ -50,7 +50,7 @@ class AdminController extends AbstractController
         $pagination = $paginator->paginate(
             $messages, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
-            2/*limit per page*/);
+            20/*limit per page*/);
 
         return $this->render('pages/admin/messages.html.twig', ['messages' => $pagination, 'messageForm' => $form->createView()]);
     }
@@ -75,7 +75,7 @@ class AdminController extends AbstractController
         $pagination = $paginator->paginate(
             $result,
             $request->query->getInt('page', 1),
-            10);
+            15);
 
 
 
@@ -185,7 +185,7 @@ class AdminController extends AbstractController
         $pagination = $paginator->paginate(
             $deceased,
             $request->query->getInt('page', 1),
-            10);
+            15);
         return $this->render("pages/admin/deceased.html.twig", ['lodgers'=>$pagination]);
     }
 
@@ -223,7 +223,7 @@ class AdminController extends AbstractController
         $pagination = $paginator->paginate(
             $adopted,
             $request->query->getInt('page', 1),
-            10);
+            15);
 
         return $this->render("pages/admin/adopted.html.twig", ['lodgers' => $pagination]);
     }
@@ -269,7 +269,7 @@ class AdminController extends AbstractController
         $pagination = $paginator->paginate(
             $recovered,
             $request->query->getInt('page', 1),
-            10);
+            15);
         return $this->render("pages/admin/recovered.html.twig", ['lodgers'=>$pagination]);
     }
 

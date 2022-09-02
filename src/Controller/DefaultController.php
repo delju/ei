@@ -50,7 +50,7 @@ class DefaultController extends AbstractController
         $pagination = $paginator->paginate(
             $result,
             $request->query->getInt('page', 1),
-            1);
+            15);
 
         return $this->render('pages/user/adoption.html.twig', ['lodgers' => $pagination, 'searchFullForm' => $form->createView()]);
     }
@@ -90,9 +90,11 @@ class DefaultController extends AbstractController
             $message = (new Email())
                 ->from($contactFormData['email'])
                 ->to('julene.delvaux@gmail.com')
-                ->subject('vous avez reçu unn email')
-                ->text('Sender : '.$contactFormData['email'].\PHP_EOL.
-                    $contactFormData['message'],
+                ->subject('vous avez reçu un email')
+                ->text('Expéditeur : '.$contactFormData['email'].\PHP_EOL.
+                    'Nom : '.$contactFormData['name'].' '.$contactFormData['firstName'].\PHP_EOL.
+                    'Téléphone : '.$contactFormData['mobile'].\PHP_EOL.
+                    'Message : '.$contactFormData['message'],
                     'text/plain');
             $mailer->send($message);
 
