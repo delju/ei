@@ -39,9 +39,9 @@ class MyTwigExtension extends AbstractExtension
      */
     public function ageFilter($date): string
     {
-        $dateborth = new \DateTime($date->format('d-m-Y'));
+        $datebirth = new \DateTime($date->format('d-m-Y'));
         $now = new \DateTime();
-        $age = $now->diff($dateborth);
+        $age = $now->diff($datebirth);
 
         return $age->y;
     }

@@ -21,7 +21,7 @@
                             {% endif %}
                             <h5 class="card-title">
                                 <a class="lodger-card"
-                                   href="{{ url('admin-single', {slug: lodger.slug}) }}">{{ lodger.name | capitalize }}</a>| {{ lodger.borthDate | age }}
+                                   href="{{ url('admin-single', {slug: lodger.slug}) }}">{{ lodger.name | capitalize }}</a>| {{ lodger.birthDate | age }}
                                 ans </h5>
                             <h6 class="card-text">Race: {{ lodger.race }}</h6>
                             <ul class="list-inline">

@@ -19,10 +19,10 @@ class SearchFullType extends SearchType
     {
         parent::buildForm($builder, $options);
         $builder
-            ->add('species', EntityType::class, ['class'=>Species::class, 'required'=> false])
+            ->add('species', EntityType::class, ['class'=>Species::class, 'required'=> false ])
             ->add('sexe', ChoiceType::class, ['choices' => ['Mâle' => false, 'Femelle' => true],'multiple'=>true, 'expanded'=>true ,'required'=>true])
             ->add('getOns', EntityType::class, ['class'=>GetOn::class, 'required'=> false, 'multiple' => true, 'expanded' => true])
-            ->add('lastChance', CheckboxType::class, ['required'=>false])
+            ->add('lastChance', CheckboxType::class, ['label'=>'Oui','required'=>false])
             ->add('submit', SubmitType::class, ['label'=>'Recherche'])
         ;
     }

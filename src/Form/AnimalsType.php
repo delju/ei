@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Animals;
 use App\Entity\GetOn;
-use App\Entity\Races;
 use App\Entity\Species;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -23,7 +22,7 @@ class AnimalsType extends AbstractType
             ->add('species', EntityType::class, ['label' => 'Espèces', 'class' => Species::class])
             ->add('race', null, ['label' => 'Race'])
             ->add('sexe', ChoiceType::class, ['choices' => ['Mâle' => false, 'Femelle' => true], 'expanded' => true])
-            ->add('borthDate', DateType::class, array(
+            ->add('birthDate', DateType::class, array(
                 'label' => 'Date de naissance',
                 'widget' => 'choice',
                 'years' => range(date('Y'), date('Y') - 30),

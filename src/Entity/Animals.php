@@ -24,7 +24,7 @@ class Animals
     private $Sexe;
 
     #[ORM\Column(type: 'date')]
-    private $borthDate;
+    private $birthDate;
 
     #[ORM\Column(type: 'boolean')]
     private $castrate;
@@ -124,14 +124,14 @@ class Animals
         return $this;
     }
 
-    public function getBorthDate(): ?\DateTimeInterface
+    public function getbirthDate(): ?\DateTimeInterface
     {
-        return $this->borthDate;
+        return $this->birthDate;
     }
 
-    public function setBorthDate(\DateTimeInterface $borthDate): self
+    public function setbirthDate(\DateTimeInterface $birthDate): self
     {
-        $this->borthDate = $borthDate;
+        $this->birthDate = $birthDate;
 
         return $this;
     }

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AdoptionRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AdoptionRepository::class)]
 class Adoption
@@ -15,21 +16,25 @@ class Adoption
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(min: 4, max: 50)]
     private $lastName;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(min: 4, max: 50)]
     private $firstName;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(min: 4, max: 255)]
     private $Address;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $mobile;
 
     #[ORM\Column(type: 'date')]
-    private $borthDate;
+    private $birthDate;
 
     #[ORM\Column(type: 'string', length: 20)]
+    #[Assert\regex(pattern: '/^[0-9]{2}\.(0[1-9]|1[0-2])\.(0[1-9]|[1-2][0-9]|3[0-1])-[0-9]{3}\.[0-9]{2}$/', message: 'Le numéro national doit être écrit XX.XX.XX-XXX.XX', match: true)]
     private $nationalNumber;
 
     #[ORM\OneToOne(mappedBy: 'Adoption', targetEntity: Animals::class, cascade: ['persist', 'remove'])]
@@ -96,14 +101,14 @@ class Adoption
         return $this;
     }
 
-    public function getBorthDate(): ?\DateTimeInterface
+    public function getbirthDate(): ?\DateTimeInterface
     {
-        return $this->borthDate;
+        return $this->birthDate;
     }
 
-    public function setBorthDate(\DateTimeInterface $borthDate): self
+    public function setbirthDate(\DateTimeInterface $birthDate): self
     {
-        $this->borthDate = $borthDate;
+        $this->birthDate = $birthDate;
 
         return $this;
     }

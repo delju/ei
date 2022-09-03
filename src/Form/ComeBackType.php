@@ -17,7 +17,7 @@ class ComeBackType extends AbstractType
             ->add('firstName',null, ['label'=>'Prénom'])
             ->add('Address',null, ['label'=>'Adresse'])
             ->add('mobile',null, ['label'=>'Téléphone'])
-            ->add('borthDate',DateType::class, array(
+            ->add('birthDate',DateType::class, array(
                 'label' => 'Date de naissance',
                 'widget' => 'choice',
                 'years' => range(date('Y'), date('Y') - 100),

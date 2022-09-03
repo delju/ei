@@ -27,7 +27,7 @@ class ComeBack
     private $mobile;
 
     #[ORM\Column(type: 'date')]
-    private $borthDate;
+    private $birthDate;
 
     #[ORM\Column(type: 'string', length: 20)]
     private $nationalNumber;
@@ -92,14 +92,14 @@ class ComeBack
         return $this;
     }
 
-    public function getBorthDate(): ?\DateTimeInterface
+    public function getbirthDate(): ?\DateTimeInterface
     {
-        return $this->borthDate;
+        return $this->birthDate;
     }
 
-    public function setBorthDate(\DateTimeInterface $borthDate): self
+    public function setbirthDate(\DateTimeInterface $birthDate): self
     {
-        $this->borthDate = $borthDate;
+        $this->birthDate = $birthDate;
 
         return $this;
     }
