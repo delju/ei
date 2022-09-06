@@ -6,15 +6,19 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card mb-12" style="max-width: 1040px;margin: auto;">
+                {#                Affichage de la fiche du pensionnaire #}
                 {% include 'elements/lodger-report.html.twig' %}
-                <div class="content" >
+                {# Element comprenant les soins donnés et le formulaire d'ajout de soin avec onglet pour afficher l'un ou l'autre #}
+                <div class="content">
                     <ul class="nav nav-pills  justify-content-center" id="pills-tab" role="tablist">
+                        {# Onglet pour les soins #}
                         <li class="nav-item">
                             <a class="nav-link active" id="pills-profile-tab" data-toggle="pill"
                                href="#pills-profile"
                                role="tab"
                                aria-controls="pills-profile" aria-selected="true">Soins</a>
                         </li>
+                        {# Onglet pour l'ajout de soin #}
                         <li class="nav-item">
                             <a class="nav-link" id="pills-contact-tab" data-toggle="pill"
                                href="#pills-contact"
@@ -22,17 +26,19 @@
                                aria-controls="pills-contact" aria-selected="false">Ajouter un soin</a>
                         </li>
                     </ul>
+
+                    {# Affichage du contenu onglet soins #}
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active m-4" id="pills-profile" role="tabpanel"
                              aria-labelledby="pills-profile-tab">
-
+                            {# Affichage du message lors du succes de l'ajout d'un soin #}
                             {% for message in app.flashes('successAddCare') %}
                                 <div class="alert alert-success">
                                     {{ message }}
                                 </div>
                             {% endfor %}
 
-
+                            {#  Tableau reprenant tout les messages #}
                             <table class="table table-bordered product-table" style="color: #000000;">
                                 <thead>
                                 <tr>
@@ -42,6 +48,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                {# Boucle qui reprend tout les soins donnés à l'animal et leurs détails #}
                                 {% for treatment in single.treatments %}
                                     <tr>
                                         <td>{{ treatment.user.email }}</td>
@@ -53,9 +60,10 @@
                                 </tbody>
                             </table>
                         </div>
+                        {# Affichage du contenu de l'onget ajout de soin #}
                         <div class="tab-pane fade mt-5" id="pills-contact" role="tabpanel"
                              aria-labelledby="pills-contact-tab">
-
+                            {# Affichage de l'élément du formulaire d'ajout de soin #}
                             {% include 'pages/admin/form/add-treatment.html.twig' %}
 
                         </div>

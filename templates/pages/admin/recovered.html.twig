@@ -3,14 +3,16 @@
 {% block title %} Admin - Retrouvés{% endblock title %}
 
 {% block page%}
-
+{#Titre#}
     <h4>Retrouvés</h4>
-
+{#Affichage du message lors de l'ajout d'un pensionnaire dans la liste#}
     {% for message in app.flashes('addRecovered') %}
         <div class="alert alert-success">
             {{ message }}
         </div>
     {% endfor %}
+
+{#    Affichage des pensionnaires#}
     {% include 'elements/lodgers-card.html.twig' %}
 
 

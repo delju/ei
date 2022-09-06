@@ -6,13 +6,19 @@
     <!-- Outer Row -->
     <div class="row justify-content-center">
         <div class="col-xl-10 col-lg-12 col-md-9">
-
+            {#    Affichage du message lors de l'ajout d'un message #}
+            {% for message in app.flashes('successMessageAdmin') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Messages</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
+                        {# Tableau qui contient les messages #}
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
@@ -23,6 +29,7 @@
                             </tr>
                             </thead>
                             <tbody>
+                            {#                            Boucle pour afficher tout les messages et leurs contenus #}
                             {% for message in messages %}
                                 <tr>
                                     <td>{{ message.date | date('d-m-Y') }}</td>
@@ -43,7 +50,7 @@
                 </div>
 
             </div>
-
+            {# Formulaire pour l'ajout d'un message #}
             {{ form(messageForm) }}
         </div>
 

@@ -2,19 +2,19 @@
 
 {% block title %} Admin - Adoptés{% endblock title %}
 
-{% block page%}
-
+{% block page %}
+    {# Titre #}
     <h4>Adoptés</h4>
-
+    {# Affichage du message lors de l'ajout du pensionnaire dans la liste #}
     {% for message in app.flashes('addAdopted') %}
         <div class="alert alert-success">
             {{ message }}
         </div>
     {% endfor %}
-
+    {# Affichage des pensionnaires adoptés #}
     {% include 'elements/lodgers-card.html.twig' %}
 
-    <!-- pagination -->
+    {# pagination #}
     <div class="self-pagination row justify-content-center ">
         {{ knp_pagination_render(lodgers) }}
     </div>
