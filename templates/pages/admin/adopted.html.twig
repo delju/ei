@@ -6,6 +6,12 @@
 
     <h4>Adoptés</h4>
 
+    {% for message in app.flashes('addAdopted') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     {% include 'elements/lodgers-card.html.twig' %}
 
     <!-- pagination -->

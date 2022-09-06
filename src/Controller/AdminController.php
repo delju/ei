@@ -44,6 +44,7 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($message);
             $em->flush();
+            $this->addFlash('successMessageAdmin', 'Votre message est bien enregistré');
             return $this->redirectToRoute('admin-home');
         }
 
@@ -66,9 +67,9 @@ class AdminController extends AbstractController
         $form = $this->createForm(SearchFullType::class, $search);
         $form->handleRequest($request);
         //Si le formulaire est envoyé et valide, on effectue la recherche selon les critères de findbysearch
-        if ($form->isSubmitted() && $form->isValid()){
-           $result = $animalsRepository->findBySearch($search);
-        }else{
+        if ($form->isSubmitted() && $form->isValid()) {
+            $result = $animalsRepository->findBySearch($search);
+        } else {
             $result = $animalsRepository->findAllInAdoption();
         }
 
@@ -78,15 +79,14 @@ class AdminController extends AbstractController
             15);
 
 
-
-        return $this->render('pages/admin/lodgers.html.twig', ['lodgers' => $pagination, 'searchFullForm'=>$form->createView()]);
+        return $this->render('pages/admin/lodgers.html.twig', ['lodgers' => $pagination, 'searchFullForm' => $form->createView()]);
     }
 
     /**
      * @Route("/admin-single/{slug}", name="admin-single")
      */
 
-    public function Single(string $slug, AnimalsRepository $animalsRepository,Request $request, EntityManagerInterface $em, PaginatorInterface $paginator): Response
+    public function Single(string $slug, AnimalsRepository $animalsRepository, Request $request, EntityManagerInterface $em, PaginatorInterface $paginator): Response
     {
 //    Trouver l'animal selon son slug.
         $single = $animalsRepository->findWithAll($slug);
@@ -99,11 +99,14 @@ class AdminController extends AbstractController
         if ($formCares->isSubmitted() && $formCares->isValid()) {
             $em->persist($cares);
             $em->flush();
+
+            $this->addFlash('successAddCare', 'Votre soin a bien été ajouté');
+
             return $this->redirectToRoute('admin-single', ['slug' => $single->getSlug()]);
         }
 
 
-        return $this->render('pages/admin/single.html.twig', ['single' => $single, 'caresForm'=>$formCares->createView()]);
+        return $this->render('pages/admin/single.html.twig', ['single' => $single, 'caresForm' => $formCares->createView()]);
     }
 
     /**
@@ -116,16 +119,21 @@ class AdminController extends AbstractController
         /* Création d'un formulaire à partir de AnimalsType */
         $formAnimals = $this->createForm(AnimalsType::class, $animals);
         $formAnimals->handleRequest($request);
+        //Si formulaire envoyé et validé, on enregistre les photos
         if ($formAnimals->isSubmitted() && $formAnimals->isValid()) {
             foreach ($formAnimals->get('gallery')->get('photos') as $photoData) {
                 $photo = $photoUploader->uploadPhoto($photoData);
                 $animals->getGallery()->addPhoto($photo);
                 $em->persist($photo);
-            }
 
+            }
+            // Ensuite on ajoute lié la gallery et l'animal
             $em->persist($animals->getGallery());
             $em->persist($animals);
             $em->flush();
+            // Message de succès
+            $this->addFlash('successAddLodger', 'Le pensionnaire a bien été ajouté');
+
             return $this->redirectToRoute('admin-lodgers', ['slug' => $animals->getSlug()]);
         }
         return $this->render('pages/admin/form/add-lodgers.html.twig', ['animalsForm' => $formAnimals->createView()]);
@@ -152,7 +160,10 @@ class AdminController extends AbstractController
             $em->persist($lodger->getGallery());
             $em->persist($lodger);
             $em->flush();
-            return $this->redirectToRoute('single', ['slug' => $lodger->getSlug()]);
+
+            $this->addFlash('editLodger', 'La fiche du pensionnaire a bien été modifié');
+
+            return $this->redirectToRoute('admin-lodgers');
         }
         return $this->render('pages/admin/form/add-lodgers.html.twig', ['animalsForm' => $formAnimals->createView()]);
     }
@@ -167,8 +178,8 @@ class AdminController extends AbstractController
         $lodger = $animalsRepository->find($id);
         $em->remove($lodger);
         $em->flush();
-        //Message lors de la suppression du manga qui s'affichera dans le layout de l'admin
-//        $this->addFlash('deleteManga', 'Le manga a bien été supprimé');
+        //Message lors de la suppression du pensionnaire
+    $this->addFlash('deleteLodger', 'Le pensionnaire a bien été supprimé');
         //ON retourne vers admin-books
         return $this->redirectToRoute('admin-lodgers');
     }
@@ -186,11 +197,11 @@ class AdminController extends AbstractController
             $deceased,
             $request->query->getInt('page', 1),
             15);
-        return $this->render("pages/admin/deceased.html.twig", ['lodgers'=>$pagination]);
+        return $this->render("pages/admin/deceased.html.twig", ['lodgers' => $pagination]);
     }
 
     /**
-     * @Route("/admin-add-deceased/{id}", name="add-deceased")
+     * @Route("/admin-add-deceased/{id<\d+>}", name="add-deceased")
      */
 
     public function addDeceased(int $id, AnimalsRepository $animalsRepository, Request $request, EntityManagerInterface $em): Response
@@ -206,8 +217,12 @@ class AdminController extends AbstractController
             $em->persist($lodger);
             $em->flush();
 
+            $this->addFlash('addDeceased', 'Le pensionnaire a été ajouté à la liste');
+
+
             return $this->redirectToRoute('deceased');
         }
+
 
 
         return $this->render("pages/admin/form/add-deceased.html.twig", ['deceasedForm' => $formDeceased->createView()]);
@@ -229,7 +244,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin-add-adoption/{id}", name="add-adoption")
+     * @Route("/admin-add-adoption/{id<\d+>}", name="add-adoption")
      */
 
     public function AddAdoption(int $id, AnimalsRepository $animalsRepository, Request $request, EntityManagerInterface $em, PhotoUploader $photoUploader): Response
@@ -251,6 +266,8 @@ class AdminController extends AbstractController
             $em->persist($lodger);
             $em->flush();
 
+            $this->addFlash('addAdopted', 'Le pensionnaire a été ajouté à la liste');
+
             return $this->redirectToRoute('adopted');
         }
 
@@ -270,11 +287,11 @@ class AdminController extends AbstractController
             $recovered,
             $request->query->getInt('page', 1),
             15);
-        return $this->render("pages/admin/recovered.html.twig", ['lodgers'=>$pagination]);
+        return $this->render("pages/admin/recovered.html.twig", ['lodgers' => $pagination]);
     }
 
     /**
-     * @Route("/admin-add-recovered/{id}", name="add-recovered")
+     * @Route("/admin-add-recovered/{id<\d+>}", name="add-recovered")
      */
 
     public function addRecovered(int $id, AnimalsRepository $animalsRepository, Request $request, EntityManagerInterface $em): Response
@@ -290,8 +307,12 @@ class AdminController extends AbstractController
             $em->persist($lodger);
             $em->flush();
 
+            $this->addFlash('addRecovered', 'Le pensionnaire a été ajouté à la liste');
+
+
             return $this->redirectToRoute('recovered', ['slug' => $lodger->getSlug()]);
         }
+
 
 
         return $this->render("pages/admin/form/add-recovered.html.twig", ['recoveredForm' => $formRecovered->createView()]);

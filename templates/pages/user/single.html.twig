@@ -4,12 +4,27 @@
 {% block page %}
     <section class="m-page">
         <div class="container">
-
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     <div class="card mb-12" style="max-width: 1040px;margin: auto;">
-                        {% include 'elements/lodger-report.html.twig'  %}
+                        {% include 'elements/lodger-report.html.twig' %}
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="mb-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 interest">
+                    <h4>Intéressé? </h4>
+                    <p>
+                        Merci de nous contacter au <span class="font-weight-bold">04 657 77 87</span> pour prendre rendez-vous
+                    </p>
+                    <p>OU</p>
+                    <p>Remplissez le <a href="{{ url('contact') }}">formulaire de contact</a></p>
+                    <p>OU</p>
+                    <p>Venez nous rendre visite durant les heures d'ouverture: du <span class="font-weight-bold">Lundi au Samedi de 13h jusque 17h</span></p>
                 </div>
             </div>
         </div>

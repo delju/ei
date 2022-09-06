@@ -69,7 +69,7 @@ label {
 .nav-pills.with-background .nav-link {
   background: white;
   padding: 10px 0;
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
 .nav-pills.with-background .nav-link:hover {
@@ -137,7 +137,7 @@ ul.pagination li a {
   line-height: 50px;
   text-align: center;
   border-color: transparent;
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   color: #666;
 }
 
@@ -2580,6 +2580,25 @@ article.single-post p {
 .conditions li{
   list-style-type: disc;
   margin: 10px 0;
+}
+
+/*****Page Single*****/
+
+.interest{
+  border: 1px solid #29CFF2;
+  border-radius: 25px;
+  background-color: #29CFF2;
+  padding: 20px ;
+  text-align: center;
+}
+
+.interest p{
+  color:#000;
+}
+
+.interest a{
+  font-weight: bold;
+  text-decoration: none;
 }
 
 /*****Element*****/

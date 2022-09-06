@@ -6,6 +6,12 @@
 
     <h4>Décédés</h4>
 
+    {% for message in app.flashes('addDeceased') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     {% include 'elements/lodgers-card.html.twig' %}
 
     <!-- pagination -->

@@ -25,6 +25,14 @@
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active m-4" id="pills-profile" role="tabpanel"
                              aria-labelledby="pills-profile-tab">
+
+                            {% for message in app.flashes('successAddCare') %}
+                                <div class="alert alert-success">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+
+
                             <table class="table table-bordered product-table" style="color: #000000;">
                                 <thead>
                                 <tr>

@@ -96,9 +96,11 @@ class DefaultController extends AbstractController
                     'Téléphone : '.$contactFormData['mobile'].\PHP_EOL.
                     'Message : '.$contactFormData['message'],
                     'text/plain');
+
+
             $mailer->send($message);
 
-            $this->addFlash('success', 'Vore message a été envoyé');
+            $this->addFlash('successMessage', 'Votre message a été envoyé');
 
             return $this->redirectToRoute('contact');
         }

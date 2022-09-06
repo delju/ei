@@ -5,6 +5,12 @@
 {% block page%}
 
     <h4>Retrouvés</h4>
+
+    {% for message in app.flashes('addRecovered') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
     {% include 'elements/lodgers-card.html.twig' %}
 
 
