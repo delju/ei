@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ComeBackRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Timestampable;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ComeBackRepository::class)]
 class ComeBack
@@ -12,32 +13,38 @@ class ComeBack
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $lastName;
+    #[Assert\Length(min: 4, max: 50)]
+    private ?string $lastName;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $firstName;
+    #[Assert\Length(min: 4, max: 50)]
+    private ?string $firstName;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $Address;
+    #[Assert\Length(min: 4, max: 255)]
+    private ?string $Address;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $mobile;
+    #[Assert\Length(min: 9, max: 10)]
+    private ?string $mobile;
 
     #[ORM\Column(type: 'date')]
-    private $birthDate;
+    #[Assert\Regex(pattern: '/^[0-9]{2}\.(0[1-9]|1[0-2])\.(0[1-9]|[1-2][0-9]|3[0-1])-[0-9]{3}\.[0-9]{2}$/', message: 'Le numéro national doit être écrit XX.XX.XX-XXX.XX', match: true)]
+    private ?\DateTimeInterface $birthDate;
 
     #[ORM\Column(type: 'string', length: 20)]
-    private $nationalNumber;
+
+    private ?string $nationalNumber;
 
     #[ORM\OneToOne(mappedBy: 'comeBack', targetEntity: Animals::class, cascade: ['persist', 'remove'])]
-    private $animals;
+    private ?Animals $animals;
 
     #[ORM\Column(type: 'datetime')]
     #[Timestampable(on: 'create')]
-    private $date;
+    private ?\DateTimeInterface $date;
 
     public function getId(): ?int
     {

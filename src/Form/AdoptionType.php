@@ -14,10 +14,10 @@ class AdoptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('lastName', null, ['label'=>'Nom'])
-            ->add('firstName', null, ['label'=>'Prénom'])
-            ->add('Address', null, ['label'=>'Adresse'])
-            ->add('mobile', null, ['label'=>'Numéro de téléphone'])
+            ->add('lastName', null, ['label'=>'Nom', 'help'=>'Le champ doit contenir entre 4 et 50 caractères'])
+            ->add('firstName', null, ['label'=>'Prénom', 'help'=>'Le champ doit contenir entre 4 et 50 caractères'])
+            ->add('Address', null, ['label'=>'Adresse', 'help'=>'Le champ doit contenir entre 4 et 255 caractères'])
+            ->add('mobile', null, ['label'=>'Numéro de téléphone', 'help'=>'Le champ doit contenir entre 9 et 10 chiffres'])
             ->add('birthDate', DateType::class, array(
                 'label' => 'Date de naissance',
                 'widget' => 'choice',
@@ -25,7 +25,7 @@ class AdoptionType extends AbstractType
                 'months' => range(1, 12),
                 'days' => range(1, 31)
             ))
-            ->add('nationalNumber', null, ['label'=>'Numéro National'])
+            ->add('nationalNumber', null, ['label'=>'Numéro National', 'attr'=>['placeholder'=>'XX.XX.XX-XXX.XX'], 'help'=>'XX.XX.XX-XXX.XX'])
             ->add('gallery', GalleryType::class, ['label'=>'Documents'])
             ->add('submit', SubmitType::class, ['label'=>'Envoyé']);
 

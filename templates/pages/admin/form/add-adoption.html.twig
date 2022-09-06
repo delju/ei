@@ -15,8 +15,9 @@
             {{ form_row(adoptionForm.birthDate) }}
             {{ form_row(adoptionForm.nationalNumber) }}
 
+
             {% for error in adoptionForm.gallery.vars.errors.form.getErrors(true) %}
-                <div class="alert">{{ error.message }}</div>
+                <div class="alert-danger">{{ error.message }}</div>
             {% endfor %}
 
             {{ form_label(adoptionForm.gallery) }}

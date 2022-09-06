@@ -34,7 +34,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item {% if app.request.get('_route') == 'admin-home' %}active{% endif %}">
                 <a class="nav-link" href="{{ url('admin-home') }}">
                     <span>Accueil</span></a>
             </li>
@@ -46,34 +46,30 @@
 
             <!-- Nav Item - Pensionnaire Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('admin-lodgers') }}" >
+                <a class="nav-link {% if app.request.get('_route') == 'admin-lodgers' %}active{% endif %}" href="{{ url('admin-lodgers') }}" >
                     <span>Pensionnés</span>
                 </a>
             </li>
+            <hr class="sidebar-divider">
 
             <!-- Nav Item - Les partis Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
+                <p class="nav-link m-0" >
                     <span>Les partis</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class=" py-2 collapse-inner rounded">
-
-                        <a class="collapse-item" href="{{ url('adopted') }}">Adoptés</a>
-                        <a class="collapse-item" href="{{ url('deceased') }}">Décédés</a>
-                        <a class="collapse-item" href="{{ url('recovered') }}">Récupérés</a>
-
+                </p>
+                <div class="" >
+                    <div class=" py-2 rounded">
+                        <ul style="list-style: none">
+                            <li class="nav-item {% if app.request.get('_route') == 'adopted' %}active{% endif %}"> <a class=" nav-link " href="{{ url('adopted') }}"><span>Adoptés</span></a></li>
+                            <li class="nav-item {% if app.request.get('_route') == 'deceased' %}active{% endif %}"> <a class="nav-link" href="{{ url('deceased') }}"><span>Décédés</span></a></li>
+                            <li class="nav-item {% if app.request.get('_route') == 'recovered' %}active{% endif %}"><a class="nav-link " href="{{ url('recovered') }}"><span>Récupérés</span></a></li>
+                        </ul>
                     </div>
                 </div>
             </li>
+            <hr class="sidebar-divider">
 
 
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
 
 
         </ul>

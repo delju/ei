@@ -13,40 +13,41 @@ class Adoption
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private ?int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\Length(min: 4, max: 50)]
-    private $lastName;
+    private ?string $lastName;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\Length(min: 4, max: 50)]
-    private $firstName;
+    private ?string $firstName;
 
     #[ORM\Column(type: 'string', length: 255)]
     #[Assert\Length(min: 4, max: 255)]
-    private $Address;
+    private ?string $Address;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $mobile;
+    #[Assert\Length(min: 9, max: 10)]
+    private ?string $mobile;
 
     #[ORM\Column(type: 'date')]
-    private $birthDate;
+    private ?\DateTimeInterface $birthDate;
 
     #[ORM\Column(type: 'string', length: 20)]
-    #[Assert\regex(pattern: '/^[0-9]{2}\.(0[1-9]|1[0-2])\.(0[1-9]|[1-2][0-9]|3[0-1])-[0-9]{3}\.[0-9]{2}$/', message: 'Le numéro national doit être écrit XX.XX.XX-XXX.XX', match: true)]
-    private $nationalNumber;
+    #[Assert\Regex(pattern: '/^[0-9]{2}\.(0[1-9]|1[0-2])\.(0[1-9]|[1-2][0-9]|3[0-1])-[0-9]{3}\.[0-9]{2}$/', message: 'Le numéro national doit être écrit XX.XX.XX-XXX.XX', match: true)]
+    private ?string $nationalNumber;
 
     #[ORM\OneToOne(mappedBy: 'Adoption', targetEntity: Animals::class, cascade: ['persist', 'remove'])]
-    private $animals;
+    private ?Animals $animals;
 
     #[ORM\Column(type: 'datetime')]
     #[Gedmo\Timestampable(on: 'create')]
-    private $date;
+    private ?\DateTimeInterface $date;
 
     #[ORM\OneToOne(targetEntity: Gallery::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private $gallery;
+    private ?Gallery $gallery;
 
     public function getId(): ?int
     {
@@ -101,12 +102,12 @@ class Adoption
         return $this;
     }
 
-    public function getbirthDate(): ?\DateTimeInterface
+    public function getBirthDate(): ?\DateTimeInterface
     {
         return $this->birthDate;
     }
 
-    public function setbirthDate(\DateTimeInterface $birthDate): self
+    public function setBirthDate(\DateTimeInterface $birthDate): self
     {
         $this->birthDate = $birthDate;
 

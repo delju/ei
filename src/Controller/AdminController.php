@@ -202,11 +202,11 @@ class AdminController extends AbstractController
         $formDeceased->handleRequest($request);
         //Si formulaire est envoyé et valide on persist les commentaires et on redirige la page vers le single
         if ($formDeceased->isSubmitted() && $formDeceased->isValid()) {
-            $em->persist($lodger->getAdoption());
+            $em->persist($lodger->getDeath());
             $em->persist($lodger);
             $em->flush();
 
-            return $this->redirectToRoute('single', ['slug' => $lodger->getSlug()]);
+            return $this->redirectToRoute('deceased');
         }
 
 
@@ -251,7 +251,7 @@ class AdminController extends AbstractController
             $em->persist($lodger);
             $em->flush();
 
-            return $this->redirectToRoute('single', ['slug' => $lodger->getSlug()]);
+            return $this->redirectToRoute('adopted');
         }
 
 
@@ -286,11 +286,11 @@ class AdminController extends AbstractController
         $formRecovered->handleRequest($request);
         //Si formulaire est envoyé et valide on persist les commentaires et on redirige la page vers le single
         if ($formRecovered->isSubmitted() && $formRecovered->isValid()) {
-            $em->persist($lodger->getAdoption());
+            $em->persist($lodger->getComeBack());
             $em->persist($lodger);
             $em->flush();
 
-            return $this->redirectToRoute('single', ['slug' => $lodger->getSlug()]);
+            return $this->redirectToRoute('recovered', ['slug' => $lodger->getSlug()]);
         }
 
 
