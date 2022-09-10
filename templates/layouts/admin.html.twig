@@ -22,7 +22,7 @@
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
+            <!-- Sidebar - Logo-->
             <a class="d-flex align-items-center justify-content-center" href="{{ url('admin-home') }}">
 
                 <div class="">
@@ -33,7 +33,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - Dashboard -->
+            <!-- Nav Item - Accueil -->
             <li class="nav-item {% if app.request.get('_route') == 'admin-home' %}active{% endif %}">
                 <a class="nav-link" href="{{ url('admin-home') }}">
                     <span>Accueil</span></a>
@@ -44,18 +44,18 @@
 
             <!-- Heading -->
 
-            <!-- Nav Item - Pensionnaire Collapse Menu -->
+            <!-- Nav Item - Pensionnaire en adoption -->
             <li class="nav-item">
                 <a class="nav-link {% if app.request.get('_route') == 'admin-lodgers' %}active{% endif %}" href="{{ url('admin-lodgers') }}" >
-                    <span>Pensionnés</span>
+                    <span>Pensionnaires en adoption</span>
                 </a>
             </li>
             <hr class="sidebar-divider">
 
-            <!-- Nav Item - Les partis Collapse Menu -->
+            <!-- Nav Item - Hors adoption : Adoptés, décédés ou retrouvés -->
             <li class="nav-item">
                 <p class="nav-link m-0" >
-                    <span>Les partis</span>
+                    <span>Hors adoption</span>
                 </p>
                 <div class="" >
                     <div class=" py-2 rounded">

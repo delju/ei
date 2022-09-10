@@ -46,36 +46,36 @@
                     </p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="trending-ads-slide">
-                        {# Boucle sur les derniers sortis #}
+            <div class="col-lg-12 mt-4">
+                <div class="row justify-content-xxl-center">
+                    {# Boucle sur les derniers sortis #}
 
-                        {% for lastChances in lastChance %}
-                            <div class="col-sm-12 col-md-2">
-                                <!-- product card -->
-                                <div class="product-item bg-light">
-                                    <div class="card">
-                                        <div class="thumb-content">
-                                            <a href="{{ url('single', {slug : lastChances.slug} ) }}">
-                                                <img class="card-img-top img-fluid"
-                                                     src="{{ asset('uploads/'~lastChances.gallery.photos[0].url) }}"
-                                                     alt="Card image cap">
-                                            </a>
-                                        </div>
-                                        <div class="card-body text-center">
-                                            <h4 class="card-title ">
-                                                <a class="lodger-card" href="{{ url('single', {slug: lastChances.slug}) }}">{{ lastChances.name | capitalize}} | {{ lastChances.birthdate | age }} an(s)</a>
-                                            </h4>
-                                            <p >
-                                                {{ lastChances.race }}
-                                            </p>
-                                        </div>
+                    {% for lastChances in lastChance %}
+                        <div class="col-sm-12 col-lg-3">
+                            <!-- product card -->
+                            <div class="product-item bg-light">
+                                <div class="card">
+                                    <div class="thumb-content">
+                                        <a href="{{ url('single', {slug : lastChances.slug} ) }}">
+                                            <img class="card-img-top img-fluid"
+                                                 src="{{ asset('uploads/'~lastChances.gallery.photos[0].url) }}"
+                                                 alt="Card image cap">
+                                        </a>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        <h4 class="card-title ">
+                                            <a class="lodger-card"
+                                               href="{{ url('single', {slug: lastChances.slug}) }}">{{ lastChances.name | capitalize }}
+                                                | {{ lastChances.birthdate | age }} an(s)</a>
+                                        </h4>
+                                        <p>
+                                            {{ lastChances.race }}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
-                        {% endfor %}
-                    </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

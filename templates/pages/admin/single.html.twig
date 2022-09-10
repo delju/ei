@@ -8,6 +8,8 @@
             <div class="card mb-12" style="max-width: 1040px;margin: auto;">
                 {#                Affichage de la fiche du pensionnaire #}
                 {% include 'elements/lodger-report.html.twig' %}
+
+                {% if (single.adoption is empty) and (single.comeBack is empty) and (single.death is empty) %}
                 {# Element comprenant les soins donnés et le formulaire d'ajout de soin avec onglet pour afficher l'un ou l'autre #}
                 <div class="content">
                     <ul class="nav nav-pills  justify-content-center" id="pills-tab" role="tablist">
@@ -69,6 +71,7 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>
