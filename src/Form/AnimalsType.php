@@ -33,7 +33,7 @@ class AnimalsType extends AbstractType
             ->add('personality', null, ['label' => 'Caractère'])
             ->add('getOn', EntityType::class, ['label' => 'S\'entend avec', 'class' => GetOn::class, "multiple" => true, "expanded" => true])
             ->add('health', null, ['label' => 'Santée'])
-            ->add('arrivalReason', null, [])
+            ->add('arrivalReason', null, ['label'=>'Raison de l\'arrivée'])
             ->add('castrate', ChoiceType::class, ['label' => 'Castré', 'choices' => ['Oui' => true, 'Non' => false], 'expanded' => true])
             ->add('identification', ChoiceType::class, ['label' => 'Identifié', 'choices' => ['Oui' => true, 'Non' => false], 'expanded' => true])
             ->add('identificationNumber', null, ['label' => 'Numéro d\'identification'])
