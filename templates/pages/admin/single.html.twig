@@ -9,7 +9,7 @@
                 {#                Affichage de la fiche du pensionnaire #}
                 {% include 'elements/lodger-report.html.twig' %}
 
-                {% if (single.adoption is empty) and (single.comeBack is empty) and (single.death is empty) %}
+
                 {# Element comprenant les soins donnés et le formulaire d'ajout de soin avec onglet pour afficher l'un ou l'autre #}
                 <div class="content">
                     <ul class="nav nav-pills  justify-content-center" id="pills-tab" role="tablist">
@@ -20,13 +20,14 @@
                                role="tab"
                                aria-controls="pills-profile" aria-selected="true">Soins</a>
                         </li>
+                        {% if (single.adoption is empty) and (single.comeBack is empty) and (single.death is empty) %}
                         {# Onglet pour l'ajout de soin #}
                         <li class="nav-item">
                             <a class="nav-link" id="pills-contact-tab" data-toggle="pill"
                                href="#pills-contact"
                                role="tab"
                                aria-controls="pills-contact" aria-selected="false">Ajouter un soin</a>
-                        </li>
+                        </li>{% endif %}
                     </ul>
 
                     {# Affichage du contenu onglet soins #}
@@ -62,6 +63,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        {% if (single.adoption is empty) and (single.comeBack is empty) and (single.death is empty) %}
                         {# Affichage du contenu de l'onget ajout de soin #}
                         <div class="tab-pane fade mt-5" id="pills-contact" role="tabpanel"
                              aria-labelledby="pills-contact-tab">
@@ -69,9 +71,10 @@
                             {% include 'pages/admin/form/add-treatment.html.twig' %}
 
                         </div>
+                        {% endif %}
                     </div>
                 </div>
-                {% endif %}
+
             </div>
         </div>
     </div>
