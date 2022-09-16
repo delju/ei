@@ -1,0 +1,91 @@
+{# includes/lodgers-card.html.twig #}
+
+<div class="row justify-content-center">
+    <div class="col-xl-12 col-lg-12 col-md-9">
+        {% for lodger in lodgers %}
+
+            <div class="card m-3" style="height: 250px">
+                <div class="row no-gutters">
+                    <div class="col-sm-3">
+                        <a class="lodger-card" href="{{ url('admin-single', {slug: lodger.slug}) }}">
+                            <img src="{{ asset('uploads/'~lodger.gallery.photos[0].url) }}" class="card-img lodger-card-img"
+                                 alt="photo">
+                        </a>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="card-body">
+                            {% if lodger.lastChance %}
+                                <div class="last-chance">
+                                    <i class="fa fa-heart text-danger fa-4x" style="rotate : 30deg;"></i>
+                                </div>
+                            {% endif %}
+                            <h5 class="card-title">
+                                <a class="lodger-card"
+                                   href="{{ url('admin-single', {slug: lodger.slug}) }}">{{ lodger.name | capitalize }}</a>| {{ lodger.birthDate | age }}
+                                ans </h5>
+                            <h6 class="card-text">Race: {{ lodger.race }}</h6>
+                            <ul class="list-inline">
+                                S'entend avec
+                                {% for getOns in lodger.getOn %}
+                                    <li class="card-text list-inline-item badge badge-primary">{{ getOns.name }}</li>
+                                {% endfor %}
+                            </ul>
+                            <p class="card-text">
+                                {{ lodger.personality }}
+                            </p>
+                        </div>
+                        {% if app.user %}
+                            <div class="card-footer d-flex justify-content-between">
+                                <div>
+                                    <ul class="list-inline justify-content-center">
+                                        <li class="list-inline-item">
+                                            {# Le lien pour modifier la fiche de l'animal #}
+                                            <a data-toggle="tooltip" title="Adopté"
+                                               href="{{ url('add-adoption', {id: lodger.id}) }}">
+                                                <i class="fa fa-users fa-lg"></i>
+                                            </a>
+                                        </li>
+
+                                        <li class="list-inline-item">
+                                            {# Le lien pour modifier la fiche de l'animal #}
+                                            <a data-toggle="tooltip" title="Retrouvé"
+                                               href="{{ url('add-recovered', {id: lodger.id}) }}">
+                                                <i class="fa fa-home fa-lg"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            {# Le lien pour modifier la fiche de l'animal #}
+                                            <a data-toggle="tooltip" title="Décédé"
+                                               href="{{ url('add-deceased', {id: lodger.id}) }}">
+                                                <i class="fa fa-star fa-lg"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <ul class="list-inline justify-content-center">
+                                        <li class="list-inline-item">
+                                            {# Le lien pour modifier la fiche de l'animal #}
+                                            <a data-toggle="tooltip" title="Modifier"
+                                               href="{{ url('edit-lodger', {slug: lodger.slug}) }}">
+                                                <i class="fa fa-edit fa-lg"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            {# Le lien pour supprimer #}
+                                            <a data-toggle="tooltip" title="Modifier"
+                                               href="{{ url('delete-lodger', {id: lodger.id}) }}">
+                                                <i class="fa fa-trash fa-lg text-danger"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
